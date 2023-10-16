@@ -1,7 +1,7 @@
 import React from 'react';
 import {Todolist, TodolistType} from "./Todolist";
 
-type todolistsType = {
+export type todolistsType = {
     todolistsData: TodolistType[]
 }
 
