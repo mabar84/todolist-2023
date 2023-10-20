@@ -1,28 +1,33 @@
-import React from "react";
+import React from 'react';
 
-// type TodolistsPropsType = {
-//     todolitsData: TodolistType[]
-// }
-
-export type TodolistType = {
+export type TodolistPropsType = {
+    todolistId: number
     title: string
     tasks: TodolistTaskType[]
+    deleteTask: (tdlId: number, taskId: number) => void
 }
 
-type TodolistTaskType =
+export type TodolistTaskType =
     {
         taskId: number
         title: string
         isDone: boolean
     }
 
-export const Todolist = (props: TodolistType) => {
+export const Todolist = (props: any) => {
+    const propsTasks: TodolistTaskType[] = props.tasks
 
-    const tasks = props.tasks.map((el) => {
+    const tasks = propsTasks.map((el) => {
+
+        const onClickHandler = () => {
+            props.deleteTask(props.todolistId, el.taskId)
+        }
+
         return (
             <li key={el.taskId}>
-                <input type={"checkbox"} checked={el.isDone}/>
+                <input type={'checkbox'} checked={el.isDone}/>
                 <span>{el.title}</span>
+                <button onClick={onClickHandler}>Del</button>
             </li>
         )
     })
