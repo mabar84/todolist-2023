@@ -1,32 +1,32 @@
 import React from 'react';
+import {FilterButtons} from '../filter-buttons/FilterButtons';
 
 export type TodolistPropsType = {
-    title: string
-    tasks: TodolistTaskType[]
-    deleteTask: (taskId: number) => void
-    setFilter: (f: string) => void
-}
+    title: string;
+    tasks: TodolistTaskType[];
+    deleteTask: (taskId: number) => void;
+    setFilter: (f: FilterType) => void;
+};
 
 export type todolistDataType = {
-    title: string
-    tasks: TodolistTaskType[]
-}
+    title: string;
+    tasks: TodolistTaskType[];
+};
 
-export type TodolistTaskType =
-    {
-        taskId: number
-        title: string
-        isDone: boolean
-    }
+export type TodolistTaskType = {
+    taskId: number;
+    title: string;
+    isDone: boolean;
+};
 
-export type FilterType = 'All' | 'Active' | 'Completed'
+export type FilterType = 'all' | 'active' | 'completed';
 
 export const Todolist = (props: TodolistPropsType) => {
-    const tasks = props.tasks.map((el) => {
 
+    const tasks = props.tasks.map((el) => {
         const removeTask = () => {
-            props.deleteTask(el.taskId)
-        }
+            props.deleteTask(el.taskId);
+        };
 
         return (
             <li key={el.taskId}>
@@ -34,13 +34,8 @@ export const Todolist = (props: TodolistPropsType) => {
                 <span>{el.title}</span>
                 <button onClick={removeTask}>Del</button>
             </li>
-        )
-    })
-
-    const filterTasks = (e: React.MouseEvent<HTMLElement>) => {
-        props.setFilter(e.currentTarget.getAttribute('data-name') || 'All')
-    }
-
+        );
+    });
 
     return (
         <div>
@@ -49,10 +44,7 @@ export const Todolist = (props: TodolistPropsType) => {
             <button>+</button>
             {tasks}
 
-            <button onClick={filterTasks} data-name={'All'}>ALL</button>
-            <button onClick={filterTasks} data-name={'Active'}>ACTIVE</button>
-            <button onClick={filterTasks} data-name={'Completed'}>COMPLETED</button>
-
+            <FilterButtons setFilter={props.setFilter}/>
         </div>
-    )
-}
+    );
+};
