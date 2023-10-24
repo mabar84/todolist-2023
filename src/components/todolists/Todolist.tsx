@@ -22,9 +22,11 @@ export type TodolistTaskType = {
 export type FilterType = 'all' | 'active' | 'completed';
 
 export const Todolist = (props: TodolistPropsType) => {
-
     const [taskTitle, setTaskTitle] = useState<string>('')
-
+    const addTask = () => {
+        props.addTask(taskTitle)
+        setTaskTitle('')
+    }
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(e.currentTarget.value)
     }
@@ -33,12 +35,6 @@ export const Todolist = (props: TodolistPropsType) => {
             addTask()
         }
     }
-
-    const addTask = () => {
-        props.addTask(taskTitle)
-        setTaskTitle('')
-    }
-
     return (
         <div>
             <h3>{props.title}</h3>

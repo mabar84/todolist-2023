@@ -8,12 +8,11 @@ export type FilterButtonsPropsType = {
 };
 
 export const FilterButtons = (props: FilterButtonsPropsType) => {
-
     return (
         <StyledFilterButtons>
-            <Button setFilter={props.setFilter} name={'all'} filter={'all'}/>
-            <Button setFilter={props.setFilter} name={'active'} filter={'active'}/>
-            <Button setFilter={props.setFilter} name={'completed'} filter={'completed'}/>
+            <Button setFilter={props.setFilter} buttonName={'all'} filter={'all'}/>
+            <Button setFilter={props.setFilter} buttonName={'active'} filter={'active'}/>
+            <Button setFilter={props.setFilter} buttonName={'completed'} filter={'completed'}/>
         </StyledFilterButtons>
     );
 };

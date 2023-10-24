@@ -3,7 +3,7 @@ import {FilterType} from '../todolists/Todolist';
 import {styled} from 'styled-components';
 
 export type ButtonPropsType = {
-    name: string
+    buttonName: string
     filter?: FilterType
     setFilter: (f: FilterType) => void;
 }
@@ -14,7 +14,7 @@ export const Button = (props: ButtonPropsType) => {
     };
     return (
         <StyledButton onClick={filterTasks}>
-            {props.name}
+            {props.buttonName}
         </StyledButton>
     );
 };
