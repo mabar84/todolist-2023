@@ -27,6 +27,9 @@ export const App = () => {
     const deleteTask = (id: string) => {
         setTasks(tasks.filter((t) => t.taskId !== id));
     };
+    const addTask = (newTaskTitle: string) => {
+        setTasks([{taskId: v1(), title: newTaskTitle, isDone: false}, ...tasks]);
+    };
 
     const filterTasks = () => {
         return filter === 'active'
@@ -48,6 +51,7 @@ export const App = () => {
                 title={todolistData['title']}
                 deleteTask={deleteTask}
                 setFilter={setFilter}
+                addTask={addTask}
             />
         </div>
     );

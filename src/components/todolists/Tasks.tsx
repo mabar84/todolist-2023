@@ -4,14 +4,15 @@ import {TodolistTaskType} from './Todolist';
 
 type TasksPropsType = {
     tasks: TodolistTaskType[]
-    deleteTask: (taskId: string) => void;
+    removeTask: (taskId: string) => void
 }
 
 export const Tasks = (props: TasksPropsType) => {
     const tasks = props.tasks.map((el) => {
         const removeTask = () => {
-            props.deleteTask(el.taskId);
+            props.removeTask(el.taskId)
         };
+
         return (
             <li key={el.taskId}>
                 <input type={'checkbox'} checked={el.isDone}/>
