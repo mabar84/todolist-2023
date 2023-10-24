@@ -1,6 +1,7 @@
 import React from 'react';
 import {styled} from 'styled-components';
 import {TodolistTaskType} from './Todolist';
+import {Task} from './Task';
 
 type TasksPropsType = {
     tasks: TodolistTaskType[]
@@ -8,22 +9,11 @@ type TasksPropsType = {
 }
 
 export const Tasks = (props: TasksPropsType) => {
-    const tasks = props.tasks.map((el) => {
-        const removeTask = () => {
-            props.removeTask(el.taskId)
-        };
-
-        return (
-            <li key={el.taskId}>
-                <input type={'checkbox'} checked={el.isDone}/>
-                <span>{el.title}</span>
-                <button onClick={removeTask}>Del</button>
-            </li>
-        );
-    });
     return (
         <StyledTasks>
-            {tasks}
+            {props.tasks.map((el) =>
+                <Task task={el} removeTask={props.removeTask}/>
+            )}
         </StyledTasks>
     );
 };

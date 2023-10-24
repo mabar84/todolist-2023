@@ -31,6 +31,7 @@ export const App = () => {
         setTasks([{taskId: v1(), title: newTaskTitle, isDone: false}, ...tasks]);
     };
 
+    
     const filterTasks = () => {
         return filter === 'active'
             ? tasks.filter((t) => !t.isDone)
