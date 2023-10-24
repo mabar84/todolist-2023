@@ -19,5 +19,6 @@ export const FilterButtons = (props: FilterButtonsPropsType) => {
 };
 
 const StyledFilterButtons = styled.div`
-
+  display: flex;
+  gap: 5px;
 `

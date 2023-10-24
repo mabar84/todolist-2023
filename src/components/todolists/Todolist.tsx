@@ -4,7 +4,7 @@ import {FilterButtons} from '../filter-buttons/FilterButtons';
 export type TodolistPropsType = {
     title: string;
     tasks: TodolistTaskType[];
-    deleteTask: (taskId: number) => void;
+    deleteTask: (taskId: string) => void;
     setFilter: (f: FilterType) => void;
 };
 
@@ -14,7 +14,7 @@ export type todolistDataType = {
 };
 
 export type TodolistTaskType = {
-    taskId: number;
+    taskId: string;
     title: string;
     isDone: boolean;
 };

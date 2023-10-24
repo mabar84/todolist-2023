@@ -5,15 +5,16 @@ import {
     todolistDataType,
     TodolistTaskType,
 } from './components/todolists/Todolist';
+import {v1} from 'uuid';
 
 const todolistData: todolistDataType = {
     title: 'What to do',
     tasks: [
-        {taskId: 1, title: 'Read', isDone: true},
-        {taskId: 2, title: 'Sleep', isDone: false},
-        {taskId: 3, title: 'Eat', isDone: false},
-        {taskId: 4, title: 'Code', isDone: true},
-        {taskId: 5, title: 'Toilet', isDone: false},
+        {taskId: v1(), title: 'Read', isDone: true},
+        {taskId: v1(), title: 'Sleep', isDone: false},
+        {taskId: v1(), title: 'Eat', isDone: false},
+        {taskId: v1(), title: 'Code', isDone: true},
+        {taskId: v1(), title: 'Toilet', isDone: false},
     ],
 };
 
@@ -23,7 +24,7 @@ export const App = () => {
     );
     const [filter, setFilter] = useState<FilterType>('all');
 
-    const deleteTask = (id: number) => {
+    const deleteTask = (id: string) => {
         setTasks(tasks.filter((t) => t.taskId !== id));
     };
 
