@@ -4,7 +4,7 @@ import {FilterType} from '../todolists/Todolist';
 import {Button} from './Button';
 
 export type FilterButtonsPropsType = {
-    setFilter: (f: FilterType) => void;
+    setFilter: (f: FilterType) => void
 };
 
 export const FilterButtons = (props: FilterButtonsPropsType) => {
