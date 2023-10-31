@@ -6,13 +6,15 @@ import {Task} from './Task';
 type TasksPropsType = {
     tasks: TodolistTaskType[]
     removeTask: (taskId: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean) => void
 }
 
 export const Tasks = (props: TasksPropsType) => {
     return (
         <StyledTasks>
             {props.tasks.map((el) =>
-                <Task task={el} removeTask={props.removeTask}/>
+                <Task key={el.taskId} changeTaskStatus={props.changeTaskStatus} task={el}
+                      removeTask={props.removeTask}/>
             )}
         </StyledTasks>
     );

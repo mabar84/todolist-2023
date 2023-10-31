@@ -31,7 +31,15 @@ export const App = () => {
         setTasks([{taskId: v1(), title: newTaskTitle, isDone: false}, ...tasks]);
     };
 
-    
+    const changeTaskStatus = (taskId: string, isDone: boolean) => {
+        let task = tasks.find(t => t.taskId === taskId)
+        if (task) {
+            task.isDone = isDone
+        }
+        setTasks([...tasks])
+    }
+
+
     const filterTasks = () => {
         return filter === 'active'
             ? tasks.filter((t) => !t.isDone)
@@ -39,7 +47,6 @@ export const App = () => {
                 ? tasks.filter((t) => t.isDone)
                 : tasks;
     };
-
     let filteredTasks = filterTasks();
 
     return (
@@ -53,6 +60,8 @@ export const App = () => {
                 deleteTask={deleteTask}
                 setFilter={setFilter}
                 addTask={addTask}
+                changeTaskStatus={changeTaskStatus}
+                filter={filter}
             />
         </div>
     );

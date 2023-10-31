@@ -4,8 +4,9 @@ import {styled} from 'styled-components';
 
 export type ButtonPropsType = {
     buttonName: string
-    filter?: FilterType
-    setFilter: (f: FilterType) => void;
+    filter: FilterType
+    setFilter: (filter: FilterType) => void;
+    isActive: boolean
 }
 
 export const Button = (props: ButtonPropsType) => {
@@ -13,7 +14,7 @@ export const Button = (props: ButtonPropsType) => {
         props.setFilter(props.filter || 'all');
     };
     return (
-        <StyledButton onClick={filterTasks}>
+        <StyledButton onClick={filterTasks} className={props.isActive ? 'active' : ''}>
             {props.buttonName}
         </StyledButton>
     );
@@ -22,10 +23,13 @@ export const Button = (props: ButtonPropsType) => {
 const StyledButton = styled.button`
   min-width: 70px;
   padding: 5px;
-  background: orange;
   border-radius: 5px;
   font-size: 14px;
-  border: 1px solid orangered;
+  border: 1px solid orange;
   text-transform: uppercase;
   cursor: pointer;
+
+  &.active {
+    background: orange;
+  }
 `
