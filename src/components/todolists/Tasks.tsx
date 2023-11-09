@@ -1,10 +1,10 @@
 import React from 'react';
 import {styled} from 'styled-components';
-import {TodolistTaskType} from './Todolist';
 import {Task} from './Task';
+import {TaskType} from '../../App';
 
 type TasksPropsType = {
-    tasks: TodolistTaskType[]
+    tasks: TaskType[]
     removeTask: (taskId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
 }

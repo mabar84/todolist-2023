@@ -2,42 +2,38 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterButtons} from '../filter-buttons/FilterButtons';
 import {Tasks} from './Tasks';
 import {styled} from 'styled-components';
+import {TaskType} from '../../App';
 
 export type TodolistPropsType = {
+    id: string
     title: string
-    tasks: TodolistTaskType[]
-    deleteTask: (taskId: string) => void
-    addTask: (newTaskTitle: string) => void
-    setFilter: (filterValue: FilterType) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    tasks: TaskType[]
+    removeTodolist: (todolistId: string) => void
+    deleteTask: (todolistId: string, taskId: string) => void
+    addTask: (todolistId: string, newTaskTitle: string) => void
+    changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
     filter: string
 };
 
 export type todolistDataType = {
     title: string
-    tasks: TodolistTaskType[]
+    tasks: TaskType[]
 }
-export type TodolistTaskType = {
-    taskId: string
-    title: string
-    isDone: boolean
-}
+
 export type FilterType = 'all' | 'active' | 'completed';
 
 export const Todolist = (props: TodolistPropsType) => {
     const [taskTitle, setTaskTitle] = useState<string>('')
     const [error, setError] = useState<string | null>(null)
+    const [filter, setFilter] = useState<FilterType>('all')
 
     const addTask = () => {
         if (taskTitle.trim() !== '') {
-            console.log(342)
-            props.addTask(taskTitle.trim())
+            props.addTask(props.id, taskTitle.trim())
             setTaskTitle('')
         } else {
             setError('This field is required')
         }
-
-
     }
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setError(null)
@@ -49,17 +45,42 @@ export const Todolist = (props: TodolistPropsType) => {
             addTask()
         }
     }
+    const deleteTodolist = () => {
+        props.removeTodolist(props.id)
+    }
+
+    const deleteTask = (taskId: string) => {
+        props.deleteTask(props.id, taskId)
+    }
+    const changeTaskStatus = (taskId: string, isDone: boolean) => {
+        props.changeTaskStatus(props.id, taskId, isDone)
+    }
+
+    const filterTasks = () => {
+        return filter === 'active'
+            ? props.tasks.filter((t) => !t.isDone)
+            : filter === 'completed'
+                ? props.tasks.filter((t) => t.isDone)
+                : props.tasks;
+
+    };
+    let filteredTasks = filterTasks();
+
+    console.log(filter)
+
     return (
         <StyledTodolist>
-            <h3>{props.title}</h3>
+            <h3>{props.title}
+                <button onClick={deleteTodolist}>Del</button>
+            </h3>
             <input className={error ? 'error' : ''} type="text" value={taskTitle}
                    onChange={onChangeInputHandler}
                    onKeyDown={onKeyDownInputHandler}
             />
             <button onClick={addTask}>+</button>
             <p> {error} </p>
-            <Tasks changeTaskStatus={props.changeTaskStatus} tasks={props.tasks} removeTask={props.deleteTask}/>
-            <FilterButtons setFilter={props.setFilter} filter={props.filter}/>
+            <Tasks changeTaskStatus={changeTaskStatus} tasks={filteredTasks} removeTask={deleteTask}/>
+            <FilterButtons setFilter={setFilter} filter={props.filter}/>
         </StyledTodolist>
     );
 };

@@ -1,9 +1,9 @@
 import React, {ChangeEvent} from 'react';
 import {styled} from 'styled-components';
-import {TodolistTaskType} from './Todolist';
+import {TaskType} from '../../App';
 
 type TaskPropsType = {
-    task: TodolistTaskType
+    task: TaskType
     removeTask: (taskId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
 }
