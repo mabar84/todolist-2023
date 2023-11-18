@@ -4,6 +4,7 @@ import {
     Todolist,
 } from './components/todolists/Todolist';
 import {v1} from 'uuid';
+import {AddItem} from './components/add-item/AddItem';
 
 export type TodolistType = {
     id: string
@@ -60,11 +61,18 @@ export const App = () => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].map(t => t.taskId === taskId ? {...t, isDone} : t)})
     }
 
+    const addTodolist = (title: string) => {
+        const newTodolistId = v1()
+        setTodolists([{id: newTodolistId, title, filter: 'all'}, ...todolists])
+        setTasks({[newTodolistId]: [], ...tasks})
+    }
+
     return (
         <div
             className="App"
             style={{display: 'flex', gap: '20px', padding: '10px'}}
         >
+            <AddItem callBack={addTodolist}/>
             {todolists.map(tl => {
                 return (
                     <Todolist
