@@ -7,13 +7,15 @@ type TasksPropsType = {
     tasks: TaskType[]
     removeTask: (taskId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
+    updateTaskTitle: (taskId: string, title: string) => void
 }
 
 export const Tasks = (props: TasksPropsType) => {
     return (
         <StyledTasks>
             {props.tasks.map((el) =>
-                <Task key={el.taskId} changeTaskStatus={props.changeTaskStatus} task={el}
+                <Task updateTaskTitle={props.updateTaskTitle} key={el.taskId} changeTaskStatus={props.changeTaskStatus}
+                      task={el}
                       removeTask={props.removeTask}/>
             )}
         </StyledTasks>
