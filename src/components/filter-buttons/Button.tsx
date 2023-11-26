@@ -4,18 +4,22 @@ import {styled} from 'styled-components';
 
 export type ButtonPropsType = {
     buttonName: string
+    value: FilterType
     filter: FilterType
     setFilter: (filter: FilterType) => void;
-    isActive: boolean
 }
 
 export const Button = (props: ButtonPropsType) => {
+    let isActive = props.value === props.filter ? true : false
     const filterTasks = () => {
-        props.setFilter(props.filter || 'all');
-        console.log(props.isActive)
+        props.setFilter(props.value);
+        console.log('value=', props.value)
+        console.log('filter=', props.filter)
+        console.log(props.value === props.filter)
+
     };
     return (
-        <StyledButton onClick={filterTasks} className={props.isActive ? 'active' : ''}>
+        <StyledButton onClick={filterTasks} className={isActive ? 'active' : ''}>
             {props.buttonName}
         </StyledButton>
     );

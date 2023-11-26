@@ -13,7 +13,7 @@ export type TodolistPropsType = {
     deleteTask: (todolistId: string, taskId: string) => void
     addTask: (todolistId: string, newTaskTitle: string) => void
     changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
-    filter: string
+    filter: FilterType
     updateTodolistTitle: (todolistId: string, title: string) => void
     updateTaskTitle: (todolistId: string, taskId: string, title: string) => void
 };
@@ -26,7 +26,7 @@ export type todolistDataType = {
 export type FilterType = 'all' | 'active' | 'completed';
 
 export const Todolist = (props: TodolistPropsType) => {
-    const [filter, setFilter] = useState<FilterType>('all')
+    const [filter, setFilter] = useState<FilterType>(props.filter)
 
     const deleteTodolist = () => props.removeTodolist(props.id)
     const addTask = (title: string) => props.addTask(props.id, title)
@@ -60,7 +60,7 @@ export const Todolist = (props: TodolistPropsType) => {
 
             <Tasks updateTaskTitle={updateTaskTitle} changeTaskStatus={changeTaskStatus} tasks={filteredTasks}
                    removeTask={deleteTask}/>
-            <FilterButtons setFilter={setFilter} filter={props.filter}/>
+            <FilterButtons setFilter={setFilter} filter={filter}/>
         </div>
     );
 };

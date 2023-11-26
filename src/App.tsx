@@ -52,7 +52,7 @@ export const App = () => {
 
     const [todolists, dispatchTodolists] = useReducer(todolistsReducer, [
         {id: todolistId1, title: 'What to do', filter: 'all'},
-        {id: todolistId2, title: 'What to learn', filter: 'completed'},
+        {id: todolistId2, title: 'What to learn', filter: 'all'},
     ])
 
     const addTask = (todolistId: string, title: string) => {

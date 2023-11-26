@@ -5,17 +5,17 @@ import {Button} from './Button';
 
 export type FilterButtonsPropsType = {
     setFilter: (f: FilterType) => void
-    filter: string
+    filter: FilterType
 };
 
 export const FilterButtons = (props: FilterButtonsPropsType) => {
     return (
         <StyledFilterButtons>
-            <Button setFilter={props.setFilter} buttonName={'all'} filter={'all'} isActive={props.filter === 'all'}/>
-            <Button setFilter={props.setFilter} buttonName={'active'} filter={'active'}
-                    isActive={props.filter === 'active'}/>
-            <Button setFilter={props.setFilter} buttonName={'completed'} filter={'completed'}
-                    isActive={props.filter === 'completed'}/>
+            <Button setFilter={props.setFilter} filter={props.filter} buttonName={'all'} value={'all'}/>
+            <Button setFilter={props.setFilter} filter={props.filter} buttonName={'active'} value={'active'}
+            />
+            <Button setFilter={props.setFilter} filter={props.filter} buttonName={'completed'} value={'completed'}
+            />
         </StyledFilterButtons>
     );
 };
