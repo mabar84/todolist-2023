@@ -22,7 +22,7 @@ export const Task = (props: TaskPropsType) => {
     }
 
     return (
-        <StyledTask className={props.task.isDone ? 'completed' : ''}>
+        <StyledTask className={props.task.isDone ? 'isDone' : ''}>
             <input type={'checkbox'} checked={props.task.isDone} onChange={onChangeCheckboxHandler}/>
             <EditableSpan updateItemTitle={updateTaskTitle} title={props.task.title}/>
             <button onClick={onClickButtonHandler}>Del</button>
@@ -31,7 +31,7 @@ export const Task = (props: TaskPropsType) => {
 };
 
 const StyledTask = styled.li`
-  &.completed {
+  &.isDone {
     opacity: 0.5;
 
   }

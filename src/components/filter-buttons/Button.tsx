@@ -12,6 +12,7 @@ export type ButtonPropsType = {
 export const Button = (props: ButtonPropsType) => {
     const filterTasks = () => {
         props.setFilter(props.filter || 'all');
+        console.log(props.isActive)
     };
     return (
         <StyledButton onClick={filterTasks} className={props.isActive ? 'active' : ''}>
