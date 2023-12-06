@@ -12,8 +12,8 @@ import {
     removeTaskAC,
     tasksReducer,
     updateTaskTitleAC
-} from './reducers/tasksReducer';
-import {addTodolistAC, removeTodolistAC, todolistsReducer, updateTodolistTitleAC} from './reducers/todolistsReducer';
+} from './reducers/tasks-reducer';
+import {addTodolistAC, removeTodolistAC, todolistsReducer, updateTodolistTitleAC} from './reducers/todolists-reducer';
 
 export type TodolistType = {
     id: string
