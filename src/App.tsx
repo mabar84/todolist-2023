@@ -77,7 +77,7 @@ export const App = () => {
 
     const addTodolist = (title: string) => {
         const newTodolistId = v1()
-        dispatchTodolists(addTodolistAC(newTodolistId, title))
+        dispatchTodolists(addTodolistAC(title))
         // setTodolists([{id: newTodolistId, title, filter: 'all'}, ...todolists])
         // setTasks({[newTodolistId]: [], ...tasks})
         dispatchTasks(addEmptyArrayOfTaskAC(newTodolistId))
