@@ -13,7 +13,7 @@ import {
     tasksReducer,
     updateTaskTitleAC
 } from './reducers/tasks-reducer';
-import {addTodolistAC, removeTodolistAC, todolistsReducer, updateTodolistTitleAC} from './reducers/todolists-reducer';
+import {addTodolistAC, removeTodolistAC, todolistsReducer, changeTodolistTitleAC} from './reducers/todolists-reducer';
 
 export type TodolistType = {
     id: string
@@ -91,7 +91,7 @@ export const App = () => {
 
     const updateTodolistTitle = (todolistId: string, title: string) => {
         // setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, title} : tl))
-        dispatchTodolists(updateTodolistTitleAC(todolistId, title))
+        dispatchTodolists(changeTodolistTitleAC(todolistId, title))
     }
 
 
