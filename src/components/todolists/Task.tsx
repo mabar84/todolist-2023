@@ -12,13 +12,13 @@ type TaskPropsType = {
 
 export const Task = (props: TaskPropsType) => {
     const onClickButtonHandler = () => {
-        props.removeTask(props.task.taskId)
+        props.removeTask(props.task.id)
     }
     const onChangeCheckboxHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.changeTaskStatus(props.task.taskId, e.currentTarget.checked)
+        props.changeTaskStatus(props.task.id, e.currentTarget.checked)
     }
     const updateTaskTitle = (title: string) => {
-        props.updateTaskTitle(props.task.taskId, title)
+        props.updateTaskTitle(props.task.id, title)
     }
 
     return (

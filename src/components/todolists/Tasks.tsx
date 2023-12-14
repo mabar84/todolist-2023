@@ -14,7 +14,7 @@ export const Tasks = (props: TasksPropsType) => {
     return (
         <StyledTasks>
             {props.tasks.map((el) =>
-                <Task updateTaskTitle={props.updateTaskTitle} key={el.taskId} changeTaskStatus={props.changeTaskStatus}
+                <Task updateTaskTitle={props.updateTaskTitle} key={el.id} changeTaskStatus={props.changeTaskStatus}
                       task={el}
                       removeTask={props.removeTask}/>
             )}

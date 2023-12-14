@@ -1,5 +1,6 @@
 import {TasksType} from '../App';
 import {v1} from 'uuid';
+import {addTodolistAC, removeTodolistAC} from './todolists-reducer';
 
 export const tasksReducer = (state: TasksType, action: TasksActionsType): TasksType => {
     switch (action.type) {
@@ -7,7 +8,7 @@ export const tasksReducer = (state: TasksType, action: TasksActionsType): TasksT
             return {
                 ...state,
                 [action.payload.todolistId]:
-                    [{taskId: v1(), title: action.payload.title, isDone: false},
+                    [{id: v1(), title: action.payload.title, isDone: false},
                         ...state[action.payload.todolistId]]
             }
         }
@@ -15,30 +16,30 @@ export const tasksReducer = (state: TasksType, action: TasksActionsType): TasksT
             return {
                 ...state,
                 [action.payload.todolistId]:
-                    state[action.payload.todolistId].filter(t => t.taskId !== action.payload.taskId)
+                    state[action.payload.todolistId].filter(t => t.id !== action.payload.taskId)
             }
         }
         case 'UPDATE-TASK-TITLE': {
             return {
                 ...state, [action.payload.todolistId]:
-                    state[action.payload.todolistId].map(t => t.taskId === action.payload.taskId
+                    state[action.payload.todolistId].map(t => t.id === action.payload.taskId
                         ? {...t, title: action.payload.title} : t)
             }
         }
         case 'CHANGE-TASK-STATUS': {
             return {
                 ...state, [action.payload.todolistId]:
-                    state[action.payload.todolistId].map(t => t.taskId === action.payload.taskId
+                    state[action.payload.todolistId].map(t => t.id === action.payload.taskId
                         ? {...t, isDone: action.payload.isDone} : t)
             }
         }
-        case 'ADD-EMPTY-ARRAY-OF-TASKS': {
-            return {...state, [action.payload.todolistId]: []}
+        case 'ADD-TODOLIST': {
+            return {...state, [action.id]: []}
         }
-        case 'REMOVE-ARRAY-OF-TASKS': {
+        case 'REMOVE-TODOLIST': {
             const stateCopy = {...state}
-            delete stateCopy[action.payload.todolistId]
-            return {...stateCopy}
+            delete stateCopy[action.id]
+            return stateCopy
         }
         default:
             return state
@@ -50,8 +51,8 @@ type TasksActionsType =
     | ReturnType<typeof removeTaskAC>
     | ReturnType<typeof updateTaskTitleAC>
     | ReturnType<typeof changeTaskStatusAC>
-    | ReturnType<typeof addEmptyArrayOfTaskAC>
-    | ReturnType<typeof removeArrayOfTaskAC>
+    | ReturnType<typeof removeTodolistAC>
+    | ReturnType<typeof addTodolistAC>
 
 export const addTaskAC = (todolistId: string, title: string) =>
     ({type: 'ADD-TASK', payload: {todolistId, title}} as const)
@@ -64,10 +65,3 @@ export const updateTaskTitleAC = (todolistId: string, taskId: string, title: str
 
 export const changeTaskStatusAC = (todolistId: string, taskId: string, isDone: boolean) =>
     ({type: 'CHANGE-TASK-STATUS', payload: {todolistId, taskId, isDone}} as const)
-
-export const addEmptyArrayOfTaskAC = (todolistId: string) =>
-    ({type: 'ADD-EMPTY-ARRAY-OF-TASKS', payload: {todolistId}} as const)
-
-export const removeArrayOfTaskAC = (todolistId: string) =>
-    ({type: 'REMOVE-ARRAY-OF-TASKS', payload: {todolistId}} as const)
-
