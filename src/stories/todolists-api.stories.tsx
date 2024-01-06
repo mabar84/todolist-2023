@@ -10,7 +10,7 @@ export const GetTodolists = () => {
     useEffect(() => {
         // здесь мы будем делать запрос и ответ закидывать в стейт.
         // который в виде строки будем отображать в div-ке
-        todolistAPI.getTodolist().then(res => setState(res.data))
+        todolistAPI.getTodolists().then(res => setState(res.data))
     }, [])
     return <>
         {state.map(tl => <div key={tl.id}>
@@ -55,4 +55,55 @@ export const UpdateTodolistTitle = () => {
     }, [])
     return <>{JSON.stringify(state)}</>
 }
-
+export const GetTasks = () => {
+    const [state, setState] = useState<TodolistType[]>([])
+    useEffect(() => {
+        // здесь мы будем делать запрос и ответ закидывать в стейт.
+        // который в виде строки будем отображать в div-ке
+        const id = 'a573d754-17f2-4462-9e15-48a5b4a79cc5'
+        todolistAPI.getTasks(id).then(res => setState(res.data))
+    }, [])
+    return <>
+        {JSON.stringify(state)}
+    </>
+}
+export const CreateTasks = () => {
+    const [state, setState] = useState<any>(null)
+    useEffect(() => {
+        // здесь мы будем делать запрос и ответ закидывать в стейт.
+        // который в виде строки будем отображать в div-ке
+        const id = 'a573d754-17f2-4462-9e15-48a5b4a79cc5'
+        const title = 'bread'
+        todolistAPI.createTask(id, title).then(res => setState(res.data))
+    }, [])
+    return <>
+        {JSON.stringify(state)}
+    </>
+}
+export const DeleteTask = () => {
+    const [state, setState] = useState<any>(null)
+    useEffect(() => {
+        // здесь мы будем делать запрос и ответ закидывать в стейт.
+        // который в виде строки будем отображать в div-ке
+        const todolistId = 'a573d754-17f2-4462-9e15-48a5b4a79cc5'
+        const taskId = '93d6e4a6-fe80-4266-87f6-80c19cc0e57d'
+        todolistAPI.deleteTask(todolistId, taskId).then(res => setState(res.data))
+    }, [])
+    return <>
+        {JSON.stringify(state)}
+    </>
+}
+export const UpdateTask = () => {
+    const [state, setState] = useState<any>(null)
+    useEffect(() => {
+        // здесь мы будем делать запрос и ответ закидывать в стейт.
+        // который в виде строки будем отображать в div-ке
+        const todolistId = 'a573d754-17f2-4462-9e15-48a5b4a79cc5'
+        const taskId = '08e3e32e-7102-401f-b0dc-79619c7dc1ee'
+        const title = 'BLABLABLA'
+        todolistAPI.updateTask(todolistId, taskId, title).then(res => setState(res.data))
+    }, [])
+    return <>
+        {JSON.stringify(state)}
+    </>
+}
