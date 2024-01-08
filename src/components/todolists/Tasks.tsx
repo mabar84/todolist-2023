@@ -1,12 +1,12 @@
 import React from 'react';
 import {styled} from 'styled-components';
 import {Task} from './Task';
-import {TaskType} from '../../App';
+import {TaskStatuses, TaskType} from '../../reducers/tasks-reducer';
 
 type TasksPropsType = {
     tasks: TaskType[]
     removeTask: (taskId: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    changeTaskStatus: (taskId: string, status: TaskStatuses) => void
     updateTaskTitle: (taskId: string, title: string) => void
 }
 

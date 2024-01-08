@@ -1,12 +1,19 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../state/store';
-import {addTaskAC, changeTaskStatusAC, removeTaskAC, updateTaskTitleAC} from '../../reducers/tasks-reducer';
-import {TaskType} from '../../App';
+import {
+    addTaskAC,
+    changeTaskStatusAC,
+    removeTaskAC,
+    TaskStatuses,
+    TaskType,
+    updateTaskTitleAC
+} from '../../reducers/tasks-reducer';
 import {Tasks} from './Tasks';
 import {AddItem} from '../add-item/AddItem';
 import {EditableSpan} from '../editable-span/EditableSpan';
 import {FilterButtons} from '../filter-buttons/FilterButtons';
+import {FilterType} from '../../reducers/todolists-reducer';
 
 
 export type TodolistPropsType = {
@@ -17,7 +24,6 @@ export type TodolistPropsType = {
     updateTodolistTitle: (todolistId: string, title: string) => void
 };
 
-export type FilterType = 'all' | 'active' | 'completed';
 
 export const Todolist = (props: TodolistPropsType) => {
     const dispatch = useDispatch()
@@ -31,13 +37,13 @@ export const Todolist = (props: TodolistPropsType) => {
     const addTask = (title: string) => dispatch(addTaskAC(props.id, title))
     const deleteTask = (taskId: string) => dispatch(removeTaskAC(props.id, taskId))
     const updateTaskTitle = (taskId: string, title: string) => dispatch(updateTaskTitleAC(props.id, taskId, title))
-    const changeTaskStatus = (taskId: string, isDone: boolean) => dispatch(changeTaskStatusAC(props.id, taskId, isDone))
+    const changeTaskStatus = (taskId: string, status: TaskStatuses) => dispatch(changeTaskStatusAC(props.id, taskId, status))
 
     const filterTasks = () => {
         return filter === 'active'
-            ? tasks.filter((t) => !t.isDone)
+            ? tasks.filter((t) => !t.status)
             : filter === 'completed'
-                ? tasks.filter((t) => t.isDone)
+                ? tasks.filter((t) => t.status)
                 : tasks;
     };
     const filteredTasks = filterTasks();

@@ -1,6 +1,6 @@
 import React from 'react';
-import {FilterType} from '../todolists/Todolist';
 import {styled} from 'styled-components';
+import {FilterType} from '../../reducers/todolists-reducer';
 
 export type ButtonPropsType = {
     buttonName: string
