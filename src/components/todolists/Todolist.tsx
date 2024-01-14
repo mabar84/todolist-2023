@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from '../../state/store';
 import {
-    addTaskAC,
+    addTaskTC,
     changeTaskStatusAC,
     getTasksTC,
     removeTaskTC,
@@ -43,7 +43,7 @@ export const Todolist = (props: TodolistPropsType) => {
 
     const updateTodolistTitle = (title: string) => dispatch(updateTodolistTitleTC(props.id, title))
 
-    const addTask = (title: string) => dispatch(addTaskAC(props.id, title))
+    const addTask = (title: string) => dispatch(addTaskTC(props.id, title))
 
 
     const updateTaskTitle = (taskId: string, title: string) => dispatch(updateTaskTitleAC(props.id, taskId, title))
