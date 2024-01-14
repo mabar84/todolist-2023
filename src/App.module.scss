@@ -1,0 +1,10 @@
+.App {
+  background: skyblue;
+  padding: 10px;
+
+  .todolists {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}

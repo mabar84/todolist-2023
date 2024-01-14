@@ -14,7 +14,7 @@ import {AddItem} from '../add-item/AddItem';
 import {EditableSpan} from '../editable-span/EditableSpan';
 import {FilterButtons} from '../filter-buttons/FilterButtons';
 import {FilterType} from '../../reducers/todolists-reducer';
-
+import s from './Todolist.module.scss'
 
 export type TodolistPropsType = {
     id: string
@@ -49,7 +49,7 @@ export const Todolist = (props: TodolistPropsType) => {
     const filteredTasks = filterTasks();
 
     return (
-        <div>
+        <div className={s.todolist}>
             <h3>
                 <EditableSpan updateItemTitle={updateTodolistTitle} title={props.title}/>
                 <button onClick={deleteTodolist}>Del</button>

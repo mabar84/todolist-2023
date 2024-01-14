@@ -1,24 +1,24 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from './state/store';
+import {useSelector} from 'react-redux';
+import {AppRootStateType, useAppDispatch} from './state/store';
 import {
     addTodolistAC,
-    removeTodolistAC,
     changeTodolistTitleAC,
-    TodolistDomainType, setTodolistsAC
+    getTodolistsTC,
+    removeTodolistAC,
+    TodolistDomainType
 } from './reducers/todolists-reducer';
 import {Todolist} from './components/todolists/Todolist';
 import {AddItem} from './components/add-item/AddItem';
-import {todolistAPI} from './api/todolist-api';
+import s from './App.module.scss'
 
 export const App = () => {
+    const dispatch = useAppDispatch()
+
     useEffect(() => {
-        todolistAPI.getTodolists().then((res) => {
-            dispatch(setTodolistsAC(res.data))
-        })
+        dispatch(getTodolistsTC())
     }, [])
 
-    const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
 
     const addTodolist = (title: string) => dispatch(addTodolistAC(title))
@@ -26,18 +26,21 @@ export const App = () => {
     const updateTodolistTitle = (todolistId: string, title: string) => dispatch(changeTodolistTitleAC(todolistId, title))
 
     return (
-        <div className="App" style={{display: 'flex', gap: '20px', padding: '10px'}}>
+        <div className={s.App}>
             <AddItem callBack={addTodolist}/>
-            {todolists.map(tl => {
-                return (<Todolist
-                    key={tl.id}
-                    id={tl.id}
-                    title={tl.title}
-                    removeTodolist={removeTodolist}
-                    updateTodolistTitle={updateTodolistTitle}
-                    filter={tl.filter}
-                />)
-            })}
+            <div className={s.todolists}>
+                {todolists.map(tl => {
+                    return (<Todolist
+                        key={tl.id}
+                        id={tl.id}
+                        title={tl.title}
+                        removeTodolist={removeTodolist}
+                        updateTodolistTitle={updateTodolistTitle}
+                        filter={tl.filter}
+                    />)
+                })}
+            </div>
+
         </div>
     );
 };
