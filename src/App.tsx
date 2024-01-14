@@ -1,16 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
 import {
     addTodolistAC,
     removeTodolistAC,
     changeTodolistTitleAC,
-    TodolistDomainType
+    TodolistDomainType, setTodolistsAC
 } from './reducers/todolists-reducer';
 import {Todolist} from './components/todolists/Todolist';
 import {AddItem} from './components/add-item/AddItem';
+import {todolistAPI} from './api/todolist-api';
 
 export const App = () => {
+    useEffect(() => {
+        todolistAPI.getTodolists().then((res) => {
+            dispatch(setTodolistsAC(res.data))
+        })
+    }, [])
+
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
 
