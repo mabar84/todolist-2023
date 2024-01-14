@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from './state/store';
 import {
-    addTodolistAC,
+    addTodolistTC,
     changeTodolistTitleAC,
     getTodolistsTC,
     removeTodolistAC,
@@ -22,7 +22,7 @@ export const App = () => {
 
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
 
-    const addTodolist = (title: string) => dispatch(addTodolistAC(title))
+    const addTodolist = (title: string) => dispatch(addTodolistTC(title))
     const removeTodolist = (todolistId: string) => dispatch(removeTodolistAC(todolistId))
     const updateTodolistTitle = (todolistId: string, title: string) => dispatch(changeTodolistTitleAC(todolistId, title))
 

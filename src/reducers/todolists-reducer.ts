@@ -1,6 +1,6 @@
-import {v1} from 'uuid';
 import {todolistAPI} from '../api/todolist-api';
 import {Dispatch} from 'redux';
+import {AppActionsType} from '../state/store';
 
 export type TodolistType = {
     id: string;
@@ -19,7 +19,7 @@ const initialState: TodolistDomainType[] = [
     // {id: todolistId2, title: 'What to learn', filter: 'all'},
 ]
 
-export const todolistsReducer = (state: TodolistDomainType[] = initialState, action: TodolistsActionsType): TodolistDomainType[] => {
+export const todolistsReducer = (state: TodolistDomainType[] = initialState, action: AppActionsType): TodolistDomainType[] => {
     switch (action.type) {
         case 'SET-TODOLISTS': {
             return action.todolists.map(tl => ({
@@ -28,7 +28,7 @@ export const todolistsReducer = (state: TodolistDomainType[] = initialState, act
             }))
         }
         case 'ADD-TODOLIST': {
-            return [...state, {id: action.id, title: action.title, addedDate: '', order: 0, filter: 'all'}]
+            return [{...action.todolist, filter: 'all'}, ...state]
         }
         case 'REMOVE-TODOLIST': {
             return state.filter(tl => tl.id !== action.id)
@@ -45,17 +45,16 @@ export const todolistsReducer = (state: TodolistDomainType[] = initialState, act
     }
 }
 
-type TodolistsActionsType =
+export type TodolistsActionsType =
     | ReturnType<typeof addTodolistAC>
     | ReturnType<typeof removeTodolistAC>
+    | ReturnType<typeof setTodolistsAC>
     | ReturnType<typeof changeTodolistTitleAC>
     | ReturnType<typeof changeTodolistFilterAC>
-    | ReturnType<typeof setTodolistsAC>
 
-export const addTodolistAC = (title: string) => ({
+export const addTodolistAC = (todolist: TodolistType) => ({
     type: 'ADD-TODOLIST' as const,
-    id: v1(),
-    title
+    todolist
 })
 
 export const removeTodolistAC = (id: string) => ({
@@ -90,5 +89,12 @@ export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => 
     todolistAPI.deleteTodolist(todolistId)
         .then(res => {
             dispatch(removeTodolistAC(todolistId))
+        })
+}
+
+export const addTodolistTC = (title: string) => (dispatch: Dispatch) => {
+    todolistAPI.createTodolist(title)
+        .then(res => {
+            dispatch(addTodolistAC(res.data.data.item))
         })
 }
