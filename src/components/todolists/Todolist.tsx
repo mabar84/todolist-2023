@@ -14,7 +14,7 @@ import {Tasks} from './Tasks';
 import {AddItem} from '../add-item/AddItem';
 import {EditableSpan} from '../editable-span/EditableSpan';
 import {FilterButtons} from '../filter-buttons/FilterButtons';
-import {FilterType, removeTodolistTC} from '../../reducers/todolists-reducer';
+import {FilterType, removeTodolistTC, updateTodolistTitleTC} from '../../reducers/todolists-reducer';
 import s from './Todolist.module.scss'
 
 export type TodolistPropsType = {
@@ -41,7 +41,7 @@ export const Todolist = (props: TodolistPropsType) => {
     const deleteTodolist = () => dispatch(removeTodolistTC(props.id))
     const deleteTask = (taskId: string) => dispatch(removeTaskTC(props.id, taskId))
 
-    const updateTodolistTitle = (title: string) => props.updateTodolistTitle(props.id, title)
+    const updateTodolistTitle = (title: string) => dispatch(updateTodolistTitleTC(props.id, title))
 
     const addTask = (title: string) => dispatch(addTaskAC(props.id, title))
 
