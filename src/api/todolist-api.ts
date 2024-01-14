@@ -16,19 +16,41 @@ export const todolistAPI = {
     deleteTodolist: (id: string) => instance.delete<ResponseType>(`todo-lists/${id}`),
     updateTodolist: (id: string, title: string) =>
         instance.put<ResponseType>(`todo-lists/${id}`, {title}),
-
     getTasks: (id: string) => instance.get(`todo-lists/${id}/tasks`),
     createTask: (id: string, title: string) =>
         instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${id}/tasks`, {title}),
     deleteTask: (todolistId: string, taskId: string) =>
         instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`),
-    updateTask: (todolistId: string, taskId: string, title: string) =>
-        instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, {title}),
+    updateTask: (todolistId: string, taskId: string, model: UpdateAPITaskModelType) =>
+        instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, model),
 }
-
 export type ResponseType<T = {}> = {
     data: T
     messages: string[];
     fieldsErrors: string[];
     resultCode: number;
+}
+
+export enum TaskStatuses {
+    New = 0,
+    InProgress = 1,
+    Completed = 2,
+    Draft = 3,
+}
+
+export enum TaskPriorities {
+    Low = 0,
+    Middle = 1,
+    Hi = 2,
+    Urgently = 3,
+    Later = 4,
+}
+
+export type UpdateAPITaskModelType = {
+    title: string;
+    description: string;
+    status: TaskStatuses;
+    priority: TaskPriorities;
+    startDate: string;
+    deadline: string;
 }

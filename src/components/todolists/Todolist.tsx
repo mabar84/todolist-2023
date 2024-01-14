@@ -1,21 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from '../../state/store';
-import {
-    addTaskTC,
-    changeTaskStatusAC,
-    getTasksTC,
-    removeTaskTC,
-    TaskStatuses,
-    TaskType,
-    updateTaskTitleAC
-} from '../../reducers/tasks-reducer';
+import {addTaskTC, getTasksTC, removeTaskTC, TaskType, updateTaskTC,} from '../../reducers/tasks-reducer';
 import {Tasks} from './Tasks';
 import {AddItem} from '../add-item/AddItem';
 import {EditableSpan} from '../editable-span/EditableSpan';
 import {FilterButtons} from '../filter-buttons/FilterButtons';
 import {FilterType, removeTodolistTC, updateTodolistTitleTC} from '../../reducers/todolists-reducer';
 import s from './Todolist.module.scss'
+import {TaskStatuses} from '../../api/todolist-api';
 
 export type TodolistPropsType = {
     id: string
@@ -25,14 +18,12 @@ export type TodolistPropsType = {
     updateTodolistTitle: (todolistId: string, title: string) => void
 };
 
-
 export const Todolist = (props: TodolistPropsType) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(getTasksTC(props.id))
     }, [])
-
 
     const tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.id])
 
@@ -44,11 +35,10 @@ export const Todolist = (props: TodolistPropsType) => {
     const updateTodolistTitle = (title: string) => dispatch(updateTodolistTitleTC(props.id, title))
 
     const addTask = (title: string) => dispatch(addTaskTC(props.id, title))
-
-
-    const updateTaskTitle = (taskId: string, title: string) => dispatch(updateTaskTitleAC(props.id, taskId, title))
-    const changeTaskStatus = (taskId: string, status: TaskStatuses) => dispatch(changeTaskStatusAC(props.id, taskId, status))
-
+    const updateTaskTitle = (taskId: string, title: string) =>
+        dispatch(updateTaskTC(props.id, taskId, {title}))
+    const changeTaskStatus = (taskId: string, status: TaskStatuses) =>
+        dispatch(updateTaskTC(props.id, taskId, {status}))
     const filterTasks = () => {
         return filter === 'active'
             ? tasks.filter((t) => !t.status)

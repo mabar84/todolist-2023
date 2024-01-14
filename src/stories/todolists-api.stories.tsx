@@ -56,7 +56,7 @@ export const UpdateTodolistTitle = () => {
 export const GetTasks = () => {
     const [state, setState] = useState<TodolistType[]>([])
     useEffect(() => {
-        const id = 'a573d754-17f2-4462-9e15-48a5b4a79cc5'
+        const id = '4eba99d5-b0c7-4531-ab60-e02daebbaac0'
         todolistAPI.getTasks(id).then(res => setState(res.data))
     }, [])
     return <>
@@ -91,7 +91,15 @@ export const UpdateTask = () => {
         const todolistId = 'a573d754-17f2-4462-9e15-48a5b4a79cc5'
         const taskId = '08e3e32e-7102-401f-b0dc-79619c7dc1ee'
         const title = 'BLABLABLA'
-        todolistAPI.updateTask(todolistId, taskId, title).then(res => setState(res.data))
+        const model = {
+            title: title,
+            deadline: '',
+            description: '',
+            status: 0,
+            priority: 0,
+            startDate: ''
+        }
+        todolistAPI.updateTask(todolistId, taskId, model).then(res => setState(res.data))
     }, [])
     return <>
         {JSON.stringify(state)}

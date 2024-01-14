@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import {styled} from 'styled-components';
 import {EditableSpan} from '../editable-span/EditableSpan';
-import {TaskStatuses, TaskType} from '../../reducers/tasks-reducer';
+import {TaskType} from '../../reducers/tasks-reducer';
+import {TaskStatuses} from '../../api/todolist-api';
 
 type TaskPropsType = {
     task: TaskType
