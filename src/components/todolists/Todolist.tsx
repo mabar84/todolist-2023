@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from '../../state/store';
+import React, {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
+import {AppRootStateType, useAppDispatch} from '../../state/store';
 import {
     addTaskAC,
     changeTaskStatusAC,
-    removeTaskAC,
+    getTasksTC,
+    removeTaskTC,
     TaskStatuses,
     TaskType,
     updateTaskTitleAC
@@ -13,7 +14,7 @@ import {Tasks} from './Tasks';
 import {AddItem} from '../add-item/AddItem';
 import {EditableSpan} from '../editable-span/EditableSpan';
 import {FilterButtons} from '../filter-buttons/FilterButtons';
-import {FilterType} from '../../reducers/todolists-reducer';
+import {FilterType, removeTodolistTC} from '../../reducers/todolists-reducer';
 import s from './Todolist.module.scss'
 
 export type TodolistPropsType = {
@@ -26,16 +27,25 @@ export type TodolistPropsType = {
 
 
 export const Todolist = (props: TodolistPropsType) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getTasksTC(props.id))
+    }, [])
+
+
     const tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.id])
 
     const [filter, setFilter] = useState<FilterType>(props.filter)
 
-    const deleteTodolist = () => props.removeTodolist(props.id)
+    const deleteTodolist = () => dispatch(removeTodolistTC(props.id))
+    const deleteTask = (taskId: string) => dispatch(removeTaskTC(props.id, taskId))
+
     const updateTodolistTitle = (title: string) => props.updateTodolistTitle(props.id, title)
 
     const addTask = (title: string) => dispatch(addTaskAC(props.id, title))
-    const deleteTask = (taskId: string) => dispatch(removeTaskAC(props.id, taskId))
+
+
     const updateTaskTitle = (taskId: string, title: string) => dispatch(updateTaskTitleAC(props.id, taskId, title))
     const changeTaskStatus = (taskId: string, status: TaskStatuses) => dispatch(changeTaskStatusAC(props.id, taskId, status))
 
