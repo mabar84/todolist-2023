@@ -13,9 +13,7 @@ import {TaskStatuses} from '../../api/todolist-api';
 export type TodolistPropsType = {
     id: string
     title: string
-    removeTodolist: (todolistId: string) => void
     filter: FilterType
-    updateTodolistTitle: (todolistId: string, title: string) => void
 };
 
 export const Todolist = (props: TodolistPropsType) => {

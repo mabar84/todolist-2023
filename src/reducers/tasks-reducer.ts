@@ -90,8 +90,7 @@ export type TasksActionsType =
     | ReturnType<typeof updateTaskAC>
 
 /////////////////   actionsCreators
-export const addTaskAC = (task: TaskType) =>
-    ({type: 'ADD-TASK' as const, payload: {task}})
+export const addTaskAC = (task: TaskType) => ({type: 'ADD-TASK' as const, payload: {task}})
 export const removeTaskAC = (todolistId: string, taskId: string) =>
     ({type: 'REMOVE-TASK' as const, payload: {todolistId, taskId}})
 const setTasksAC = (todolistId: string, tasks: TaskType[]) =>

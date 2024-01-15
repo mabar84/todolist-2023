@@ -1,13 +1,7 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from './state/store';
-import {
-    addTodolistTC,
-    changeTodolistTitleAC,
-    getTodolistsTC,
-    removeTodolistAC,
-    TodolistDomainType
-} from './reducers/todolists-reducer';
+import {addTodolistTC, getTodolistsTC, TodolistDomainType} from './reducers/todolists-reducer';
 import {Todolist} from './components/todolists/Todolist';
 import {AddItem} from './components/add-item/AddItem';
 import s from './App.module.scss'
@@ -22,8 +16,6 @@ export const App = () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
 
     const addTodolist = (title: string) => dispatch(addTodolistTC(title))
-    const removeTodolist = (todolistId: string) => dispatch(removeTodolistAC(todolistId))
-    const updateTodolistTitle = (todolistId: string, title: string) => dispatch(changeTodolistTitleAC(todolistId, title))
 
     return (
         <div className={s.App}>
@@ -34,13 +26,10 @@ export const App = () => {
                         key={tl.id}
                         id={tl.id}
                         title={tl.title}
-                        removeTodolist={removeTodolist}
-                        updateTodolistTitle={updateTodolistTitle}
                         filter={tl.filter}
                     />)
                 })}
             </div>
-
         </div>
     );
 };
