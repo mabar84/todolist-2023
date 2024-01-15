@@ -1,7 +1,6 @@
 import {todolistAPI} from '../api/todolist-api';
+import {AppActionsType, AppThunk} from '../state/store';
 import {Dispatch} from 'redux';
-import {AppActionsType, AppRootStateType, AppThunk} from '../state/store';
-import {ThunkAction} from 'redux-thunk';
 
 export type TodolistType = {
     id: string;
@@ -73,11 +72,14 @@ export const setTodolistsAC = (todolists: TodolistType[]) => ({
 })
 
 /////////////////   thunksCreators
-export const getTodolistsTC = () => (dispatch: Dispatch<TodolistsActionsType>) =>
-    todolistAPI.getTodolists()
-        .then(res => {
-            dispatch(setTodolistsAC(res.data))
-        })
+export const getTodolistsTC = (): AppThunk => async dispatch => {
+    try {
+        const res = await todolistAPI.getTodolists()
+        dispatch(setTodolistsAC(res.data))
+    } catch (e: any) {
+        throw new Error(e)
+    }
+}
 export const addTodolistTC = (title: string): AppThunk => (dispatch: Dispatch<TodolistsActionsType>) =>
     todolistAPI.createTodolist(title)
         .then(res => {
