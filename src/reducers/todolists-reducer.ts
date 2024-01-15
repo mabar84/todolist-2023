@@ -1,6 +1,7 @@
 import {todolistAPI} from '../api/todolist-api';
 import {Dispatch} from 'redux';
-import {AppActionsType} from '../state/store';
+import {AppActionsType, AppRootStateType, AppThunk} from '../state/store';
+import {ThunkAction} from 'redux-thunk';
 
 export type TodolistType = {
     id: string;
@@ -77,7 +78,7 @@ export const getTodolistsTC = () => (dispatch: Dispatch<TodolistsActionsType>) =
         .then(res => {
             dispatch(setTodolistsAC(res.data))
         })
-export const addTodolistTC = (title: string) => (dispatch: Dispatch<TodolistsActionsType>) =>
+export const addTodolistTC = (title: string): AppThunk => (dispatch: Dispatch<TodolistsActionsType>) =>
     todolistAPI.createTodolist(title)
         .then(res => {
             dispatch(addTodolistAC(res.data.data.item))

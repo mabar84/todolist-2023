@@ -14,7 +14,6 @@ import s from './App.module.scss'
 
 export const App = () => {
     const dispatch = useAppDispatch()
-    // const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getTodolistsTC())
