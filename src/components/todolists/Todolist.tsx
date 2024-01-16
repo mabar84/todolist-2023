@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from '../../state/store';
-import {addTaskTC, getTasksTC, removeTaskTC, TaskType, updateTaskTC,} from '../../reducers/tasks-reducer';
+import {addTaskTC, getTasksTC, removeTaskTC, updateTaskTC,} from '../../reducers/tasks-reducer';
 import {Tasks} from './Tasks';
 import {AddItem} from '../add-item/AddItem';
 import {EditableSpan} from '../editable-span/EditableSpan';
 import {FilterButtons} from '../filter-buttons/FilterButtons';
 import {FilterType, removeTodolistTC, updateTodolistTitleTC} from '../../reducers/todolists-reducer';
 import s from './Todolist.module.scss'
-import {TaskStatuses} from '../../api/todolist-api';
+import {TaskStatuses, TaskType} from '../../api/todolist-api';
 
 export type TodolistPropsType = {
     id: string

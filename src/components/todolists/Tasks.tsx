@@ -1,8 +1,7 @@
 import React from 'react';
 import {styled} from 'styled-components';
+import {TaskStatuses, TaskType} from '../../api/todolist-api';
 import {Task} from './Task';
-import {TaskType} from '../../reducers/tasks-reducer';
-import {TaskStatuses} from '../../api/todolist-api';
 
 type TasksPropsType = {
     tasks: TaskType[]

@@ -1,23 +1,15 @@
-import {v1} from 'uuid';
-import {TaskPriorities, TaskStatuses, todolistAPI, UpdateAPITaskModelType} from '../api/todolist-api';
-import {Dispatch} from 'redux';
-import {AppActionsType, AppRootStateType} from '../state/store';
+import {v1} from 'uuid'
+import {
+    TaskPriorities,
+    TaskStatuses,
+    TasksType,
+    TaskType,
+    todolistAPI,
+    UpdateAPITaskModelType
+} from '../api/todolist-api'
+import {Dispatch} from 'redux'
+import {AppActionsType, AppRootStateType} from '../state/store'
 
-export type TasksType = {
-    [key: string]: TaskType[]
-}
-export type TaskType = {
-    id: string
-    title: string
-    description: string
-    todoListId: string
-    order: number
-    status: TaskStatuses
-    priority: TaskPriorities
-    startDate: string
-    deadline: string
-    addedDate: string
-}
 
 export let todolistId1 = v1()
 export let todolistId2 = v1()
@@ -44,7 +36,7 @@ export const tasksReducer = (state: TasksType = initialState, action: AppActions
             action.todolists.forEach((tl) => {
                 stateCopy[tl.id] = []
             })
-            return stateCopy;
+            return stateCopy
         }
         case 'ADD-TODOLIST': {
             return {...state, [action.todolist.id]: []}
@@ -95,14 +87,6 @@ export const removeTaskAC = (todolistId: string, taskId: string) =>
     ({type: 'REMOVE-TASK' as const, payload: {todolistId, taskId}})
 const setTasksAC = (todolistId: string, tasks: TaskType[]) =>
     ({type: 'SET-TASKS' as const, payload: {todolistId, tasks}})
-export type UpdateDomainTaskModelType = {
-    title?: string;
-    description?: string;
-    status?: TaskStatuses;
-    priority?: TaskPriorities;
-    startDate?: string;
-    deadline?: string;
-};
 export const updateTaskAC = (todolistId: string, taskId: string, model: UpdateDomainTaskModelType) =>
     ({type: 'UPDATE-TASK' as const, payload: {todolistId, taskId, model}})
 ///////////////   thunksCreators
@@ -138,3 +122,13 @@ export const updateTaskTC = (todolistId: string, taskId: string, domainModel: Up
                 .then(res => dispatch(updateTaskAC(todolistId, taskId, domainModel)))
         }
     }
+
+///////////////   types
+export type UpdateDomainTaskModelType = {
+    title?: string
+    description?: string
+    status?: TaskStatuses
+    priority?: TaskPriorities
+    startDate?: string
+    deadline?: string
+}
