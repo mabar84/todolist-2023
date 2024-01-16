@@ -10,7 +10,6 @@ import {
 import {Dispatch} from 'redux'
 import {AppActionsType, AppRootStateType} from '../state/store'
 
-
 export let todolistId1 = v1()
 export let todolistId2 = v1()
 
@@ -38,39 +37,31 @@ export const tasksReducer = (state: TasksType = initialState, action: AppActions
             })
             return stateCopy
         }
-        case 'ADD-TODOLIST': {
+        case 'ADD-TODOLIST':
             return {...state, [action.todolist.id]: []}
-        }
         case 'REMOVE-TODOLIST': {
             const stateCopy = {...state}
             delete stateCopy[action.id]
             return stateCopy
         }
-        case 'SET-TASKS': {
+        case 'SET-TASKS':
             return {...state, [action.payload.todolistId]: action.payload.tasks}
-        }
-        case 'ADD-TASK': {
+        case 'ADD-TASK':
             return {
-                ...state,
-                [action.payload.task.todoListId]:
-                    [action.payload.task,
-                        ...state[action.payload.task.todoListId]]
+                ...state, [action.payload.task.todoListId]:
+                    [action.payload.task, ...state[action.payload.task.todoListId]]
             }
-        }
-        case 'REMOVE-TASK': {
+        case 'REMOVE-TASK':
             return {
-                ...state,
-                [action.payload.todolistId]:
+                ...state, [action.payload.todolistId]:
                     state[action.payload.todolistId].filter(t => t.id !== action.payload.taskId)
             }
-        }
-        case 'UPDATE-TASK': {
+        case 'UPDATE-TASK':
             return {
                 ...state, [action.payload.todolistId]:
                     state[action.payload.todolistId].map(t => t.id === action.payload.taskId
                         ? {...t, ...action.payload.model} : t)
             }
-        }
         default:
             return state
     }
