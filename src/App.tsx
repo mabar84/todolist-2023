@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/icons-material/Menu';
 import {Typography} from '@mui/material';
 import {RequestStatusType} from './reducers/app-reducer';
+import {ErrorSnackbar} from './components/ErrorSnackbar/ErrorSnackbar';
 
 export const App = () => {
     const dispatch = useAppDispatch()
@@ -28,6 +29,7 @@ export const App = () => {
 
     return (
         <div className={s.App}>
+            <ErrorSnackbar/>
             <AppBar position={'static'} style={{marginBottom: '10px'}}>
                 <Toolbar>
                     <IconButton color={'inherit'}>

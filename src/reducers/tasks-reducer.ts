@@ -9,7 +9,7 @@ import {
 } from '../api/todolist-api'
 import {Dispatch} from 'redux'
 import {AppActionsType, AppRootStateType} from '../state/store'
-import {setAppStatus} from './app-reducer';
+import {setAppError, setAppStatus} from './app-reducer';
 
 export let todolistId1 = v1()
 export let todolistId2 = v1()
@@ -98,12 +98,21 @@ export const removeTaskTC = (todolistId: string, taskId: string) => (dispatch: D
             dispatch(setAppStatus('succeeded'))
         })
 }
-export const addTaskTC = (todolistId: string, taskId: string) => (dispatch: Dispatch) => {
+export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
     dispatch(setAppStatus('loading'))
-    todolistAPI.createTask(todolistId, taskId)
+    todolistAPI.createTask(todolistId, title)
         .then(res => {
-            dispatch(addTaskAC(res.data.data.item))
-            dispatch(setAppStatus('succeeded'))
+            if (res.data.resultCode === 0) {
+                dispatch(addTaskAC(res.data.data.item))
+                dispatch(setAppStatus('succeeded'))
+            } else {
+                if (res.data.messages.length) {
+                    dispatch(setAppError(res.data.messages[0]))
+                } else {
+                    dispatch(setAppError('Some error occured'))
+                }
+                dispatch(setAppStatus('failed'))
+            }
         })
 }
 export const updateTaskTC = (todolistId: string, taskId: string, domainModel: UpdateDomainTaskModelType) =>
