@@ -27,5 +27,4 @@ export const ErrorSnackbar = () => {
             </Alert>
         </Snackbar>
     );
-};
-
+}

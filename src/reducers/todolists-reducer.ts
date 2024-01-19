@@ -1,7 +1,7 @@
 import {todolistAPI, TodolistType} from '../api/todolist-api'
 import {AppActionsType, AppThunk} from '../state/store'
 import {Dispatch} from 'redux'
-import {setAppStatus} from './app-reducer';
+import {setAppError, setAppStatus} from './app-reducer';
 
 const initialState: TodolistDomainType[] = [
     // {id: todolistId1, title: 'What to do', filter: 'all'},
@@ -34,7 +34,6 @@ export const changeTodolistTitleAC = (id: string, title: string) =>
 export const changeTodolistFilterAC = (id: string, filter: FilterType) =>
     ({type: 'CHANGE-TODOLIST-FILTER' as const, id, filter})
 
-
 /////////////////   thunkCreators
 export const getTodolistsTC = (): AppThunk => async dispatch => {
     try {
@@ -49,8 +48,18 @@ export const addTodolistTC = (title: string): AppThunk => (dispatch: Dispatch) =
     dispatch(setAppStatus('loading'))
     todolistAPI.createTodolist(title)
         .then(res => {
-            dispatch(addTodolistAC(res.data.data.item))
-            dispatch(setAppStatus('succeeded'))
+            if (res.data.resultCode === 0) {
+                dispatch(addTodolistAC(res.data.data.item))
+                dispatch(setAppStatus('succeeded'))
+            } else {
+                if (res.data.messages.length) {
+                    dispatch(setAppError(res.data.messages[0]))
+                } else {
+                    dispatch(setAppError('Some error occured'))
+                }
+                dispatch(setAppStatus('failed'))
+            }
+
         })
 }
 export const removeTodolistTC = (todolistId: string) =>
