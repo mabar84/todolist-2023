@@ -1,14 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {styled} from 'styled-components';
 
-
 type AddItemPropsType = {
     callBack: (title: string) => void
 }
-
 export const AddItem: React.FC<AddItemPropsType> = ({callBack}) => {
-
-
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<string | null>(null)
 
@@ -37,12 +33,21 @@ export const AddItem: React.FC<AddItemPropsType> = ({callBack}) => {
                    onKeyDown={onKeyDownInputHandler}
             />
             <button onClick={addItem}>+</button>
-            <p> {error} </p>
+            {error && <p> {error} </p>}
         </StyledWrapper>
     );
 };
 
 const StyledWrapper = styled.div`
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+
+  input {
+    width: 100%;
+    max-width: 300px;
+  }
+
   input.error {
     outline: 1px solid red;
     border: 1px solid red;

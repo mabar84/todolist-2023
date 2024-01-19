@@ -1,8 +1,9 @@
 .App {
   background: skyblue;
-  padding: 10px;
+  color: white;
 
   .todolists {
+    padding: 10px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
