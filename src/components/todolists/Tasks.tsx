@@ -1,10 +1,10 @@
 import React from 'react';
 import {styled} from 'styled-components';
-import {TaskType} from '../../api/todolist-api';
 import {Task} from './Task';
+import {TaskDomainType} from '../../reducers/tasks-reducer';
 
 type TasksPropsType = {
-    tasks: TaskType[]
+    tasks: TaskDomainType[]
 }
 
 export const Tasks = (props: TasksPropsType) => {

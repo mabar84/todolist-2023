@@ -1,12 +1,7 @@
-import {
-    addTaskAC,
-    removeTaskAC,
-    tasksReducer,
-} from './tasks-reducer'
+import {addTaskAC, removeTaskAC, TasksDomainType, tasksReducer,} from './tasks-reducer'
 import {removeTodolistAC} from './todolists-reducer';
-import {TasksType} from '../api/todolist-api';
 
-let startState: TasksType
+let startState: TasksDomainType
 
 beforeEach(() => {
     startState = {
@@ -19,7 +14,8 @@ beforeEach(() => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: '2', title: 'JS', status: 2,
@@ -29,7 +25,8 @@ beforeEach(() => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: '3', title: 'React', status: 0,
@@ -39,7 +36,8 @@ beforeEach(() => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             }
         ],
         'todolistId2': [
@@ -51,7 +49,8 @@ beforeEach(() => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: '2', title: 'milk', status: 2,
@@ -61,7 +60,8 @@ beforeEach(() => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: '3', title: 'tea', status: 0,
@@ -71,7 +71,8 @@ beforeEach(() => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             }
         ]
     }
@@ -89,7 +90,8 @@ test('correct task should be deleted from correct array', () => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: '2', title: 'JS', status: 2,
@@ -99,7 +101,8 @@ test('correct task should be deleted from correct array', () => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: '3', title: 'React', status: 0,
@@ -109,7 +112,8 @@ test('correct task should be deleted from correct array', () => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             }
         ],
         'todolistId2': [
@@ -121,7 +125,8 @@ test('correct task should be deleted from correct array', () => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: '3', title: 'tea', status: 0,
@@ -131,7 +136,8 @@ test('correct task should be deleted from correct array', () => {
                 priority: 0,
                 startDate: '',
                 deadline: '',
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             }
         ]
     })
@@ -148,7 +154,8 @@ test('correct task should be added to correct array', () => {
         priority: 0,
         startDate: '',
         deadline: '',
-        addedDate: ''
+        addedDate: '',
+        entityStatus: 'idle'
     }
     const endState = tasksReducer(startState, addTaskAC(newTask))
 
