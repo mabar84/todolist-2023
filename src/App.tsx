@@ -24,7 +24,6 @@ export const App = () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
 
-
     const addTodolist = (title: string) => dispatch(addTodolistTC(title))
 
     return (
@@ -45,14 +44,7 @@ export const App = () => {
             </AppBar>
             <AddItem callBack={addTodolist}/>
             <div className={s.todolists}>
-                {todolists.map(tl => {
-                    return (<Todolist
-                        key={tl.id}
-                        id={tl.id}
-                        title={tl.title}
-                        filter={tl.filter}
-                    />)
-                })}
+                {todolists.map(tl => <Todolist key={tl.id} todolist={tl}/>)}
             </div>
         </div>
     );

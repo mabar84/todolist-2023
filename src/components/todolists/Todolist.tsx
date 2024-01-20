@@ -6,37 +6,40 @@ import {Tasks} from './Tasks';
 import {AddItem} from '../add-item/AddItem';
 import {EditableSpan} from '../editable-span/EditableSpan';
 import {FilterButtons} from '../filter-buttons/FilterButtons';
-import {FilterType, removeTodolistTC, updateTodolistTitleTC} from '../../reducers/todolists-reducer';
+import {
+    FilterType,
+    removeTodolistTC,
+    TodolistDomainType,
+    updateTodolistTitleTC
+} from '../../reducers/todolists-reducer';
 import s from './Todolist.module.scss'
 import {TaskStatuses, TaskType} from '../../api/todolist-api';
 
 export type TodolistPropsType = {
-    id: string
-    title: string
-    filter: FilterType
+    todolist: TodolistDomainType
 };
 
 export const Todolist = (props: TodolistPropsType) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(getTasksTC(props.id))
+        dispatch(getTasksTC(props.todolist.id))
     }, [])
 
-    const tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.id])
+    const tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.todolist.id])
 
-    const [filter, setFilter] = useState<FilterType>(props.filter)
+    const [filter, setFilter] = useState<FilterType>(props.todolist.filter)
 
-    const deleteTodolist = () => dispatch(removeTodolistTC(props.id))
-    const deleteTask = (taskId: string) => dispatch(removeTaskTC(props.id, taskId))
+    const deleteTodolist = () => dispatch(removeTodolistTC(props.todolist.id))
+    const deleteTask = (taskId: string) => dispatch(removeTaskTC(props.todolist.id, taskId))
 
-    const updateTodolistTitle = (title: string) => dispatch(updateTodolistTitleTC(props.id, title))
+    const updateTodolistTitle = (title: string) => dispatch(updateTodolistTitleTC(props.todolist.id, title))
 
-    const addTask = (title: string) => dispatch(addTaskTC(props.id, title))
+    const addTask = (title: string) => dispatch(addTaskTC(props.todolist.id, title))
     const updateTaskTitle = (taskId: string, title: string) =>
-        dispatch(updateTaskTC(props.id, taskId, {title}))
+        dispatch(updateTaskTC(props.todolist.id, taskId, {title}))
     const changeTaskStatus = (taskId: string, status: TaskStatuses) =>
-        dispatch(updateTaskTC(props.id, taskId, {status}))
+        dispatch(updateTaskTC(props.todolist.id, taskId, {status}))
     const filterTasks = () => {
         return filter === 'active'
             ? tasks.filter((t) => !t.status)
@@ -45,11 +48,12 @@ export const Todolist = (props: TodolistPropsType) => {
                 : tasks;
     };
     const filteredTasks = filterTasks();
+    const todolistClassName = s.todolist + (props.todolist.entityStatus === 'loading' ? ' ' + s.disabled : '')
 
     return (
-        <div className={s.todolist}>
+        <div className={todolistClassName}>
             <h3>
-                <EditableSpan updateItemTitle={updateTodolistTitle} title={props.title}/>
+                <EditableSpan updateItemTitle={updateTodolistTitle} title={props.todolist.title}/>
                 <button onClick={deleteTodolist}>Del</button>
             </h3>
             <AddItem callBack={addTask}/>

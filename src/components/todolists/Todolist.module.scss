@@ -1,4 +1,9 @@
 .todolist {
   padding: 5px;
   border: 1px solid orange;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }

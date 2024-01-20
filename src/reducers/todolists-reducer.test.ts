@@ -18,12 +18,12 @@ beforeEach(() => {
 
     startState = [
         {
-            id: todolistId1, title: 'What to learn', filter: 'all',
+            id: todolistId1, title: 'What to learn', entityStatus: 'idle', filter: 'all',
             addedDate: '',
             order: 0
         },
         {
-            id: todolistId2, title: 'What to buy', filter: 'all',
+            id: todolistId2, title: 'What to buy', entityStatus: 'idle', filter: 'all',
             addedDate: '',
             order: 0
         }
