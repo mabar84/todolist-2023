@@ -23,7 +23,6 @@ export const App = () => {
 
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-
     const addTodolist = (title: string) => dispatch(addTodolistTC(title))
 
     return (
