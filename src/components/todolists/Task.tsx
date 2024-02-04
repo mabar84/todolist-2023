@@ -1,16 +1,16 @@
 import React, {ChangeEvent} from 'react';
 import {styled} from 'styled-components';
-import {EditableSpan} from '../editable-span/EditableSpan';
-import {removeTaskTC, TaskDomainType, updateTaskTC} from '../../reducers/tasks-reducer';
-import {useAppDispatch} from '../../state/store';
 import s from './Todolist.module.scss';
+import {useDispatch} from "react-redux";
+import {removeTaskTC, TaskDomainType, updateTaskTC} from "reducers/tasks-reducer";
+import {EditableSpan} from "components/editable-span/EditableSpan";
 
 type TaskPropsType = {
     task: TaskDomainType
 }
 
 export const Task: React.FC<TaskPropsType> = ({task}) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
     const deleteTask = () => dispatch(removeTaskTC(task.todoListId, task.id))
     const updateTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
         const status = e.currentTarget.checked ? 2 : 0
@@ -32,7 +32,7 @@ export const Task: React.FC<TaskPropsType> = ({task}) => {
 };
 
 const StyledTask = styled.li`
-  &.isDone {
-    opacity: 0.5;
-  }
+    &.isDone {
+        opacity: 0.5;
+    }
 `

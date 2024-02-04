@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {useDispatch} from 'react-redux';
 import {TasksActionsType, tasksReducer} from "reducers/tasks-reducer";
 import {TodolistsActionsType, todolistsReducer} from "reducers/todolists-reducer";
 import {appReducer} from "reducers/app-reducer";
@@ -20,8 +19,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateTy
 
 export type AppActionsType = TodolistsActionsType | TasksActionsType
 export type AppDispatchType = ThunkDispatch<AppRootStateType, unknown, AppActionsType>
-export const useAppDispatch = useDispatch <AppDispatchType>;
-
 
 //@ts-ignore
 window.store = store

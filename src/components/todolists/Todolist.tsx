@@ -1,25 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
-import {AppRootStateType, useAppDispatch} from '../../state/store';
-import {addTaskTC, getTasksTC, TaskDomainType,} from '../../reducers/tasks-reducer';
-import {Tasks} from './Tasks';
-import {AddItem} from '../add-item/AddItem';
-import {EditableSpan} from '../editable-span/EditableSpan';
-import {FilterButtons} from '../filter-buttons/FilterButtons';
-import {
-    FilterType,
-    removeTodolistTC,
-    TodolistDomainType,
-    updateTodolistTitleTC
-} from '../../reducers/todolists-reducer';
+import {useDispatch, useSelector} from 'react-redux';
 import s from './Todolist.module.scss'
+import {AppRootStateType} from "state/store";
+import {FilterType, removeTodolistTC, TodolistDomainType, updateTodolistTitleTC} from "reducers/todolists-reducer";
+import {addTaskTC, getTasksTC, TaskDomainType} from "reducers/tasks-reducer";
+import {EditableSpan} from "components/editable-span/EditableSpan";
+import {AddItem} from "components/add-item/AddItem";
+import {Tasks} from "components/todolists/Tasks";
+import {FilterButtons} from "components/filter-buttons/FilterButtons";
 
 export type TodolistPropsType = {
     todolist: TodolistDomainType
 };
 
 export const Todolist = (props: TodolistPropsType) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
     const tasks = useSelector<AppRootStateType, TaskDomainType[]>(state => state.tasks[props.todolist.id])
 
     useEffect(() => {

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import s from './App.module.scss'
 import LinearProgress from '@mui/material/LinearProgress';
 import AppBar from '@mui/material/AppBar';
@@ -9,13 +9,13 @@ import Menu from '@mui/icons-material/Menu';
 import {Typography} from '@mui/material';
 import {RequestStatusType} from "reducers/app-reducer";
 import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
-import {AppRootStateType, useAppDispatch} from "state/store";
+import {AppRootStateType} from "state/store";
 import {addTodolistTC, getTodolistsTC, TodolistDomainType} from "reducers/todolists-reducer";
 import {AddItem} from "components/add-item/AddItem";
 import {Todolist} from "components/todolists/Todolist";
 
 export const App = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getTodolistsTC())
