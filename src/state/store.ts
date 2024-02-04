@@ -5,9 +5,9 @@ import {appReducer} from "reducers/app-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
+    app: appReducer,
     tasks: tasksReducer,
     todolists: todolistsReducer,
-    app: appReducer
 })
 export const store = configureStore({reducer: rootReducer})
 export type AppRootStateType = ReturnType<typeof store.getState>
