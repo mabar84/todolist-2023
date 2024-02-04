@@ -1,5 +1,5 @@
-import {addTaskAC, removeTaskAC, TasksDomainType, tasksReducer,} from './tasks-reducer'
-import {removeTodolistAC} from './todolists-reducer';
+import {addTaskAC, removeTaskAC, TasksDomainType, tasksReducer,} from 'reducers/tasksSlice'
+import {removeTodolistAC} from 'reducers/todolistsSlice';
 
 let startState: TasksDomainType
 

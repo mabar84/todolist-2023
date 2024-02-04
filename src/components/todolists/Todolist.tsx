@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import s from './Todolist.module.scss'
 import {AppRootStateType} from "state/store";
-import {FilterType, removeTodolistTC, TodolistDomainType, updateTodolistTitleTC} from "reducers/todolists-reducer";
-import {addTaskTC, getTasksTC, TaskDomainType} from "reducers/tasks-reducer";
+import {FilterType, removeTodolistTC, TodolistDomainType, updateTodolistTitleTC} from "reducers/todolistsSlice";
+import {addTaskTC, getTasksTC, TaskDomainType} from "reducers/tasksSlice";
 import {EditableSpan} from "components/editable-span/EditableSpan";
 import {AddItem} from "components/add-item/AddItem";
 import {Tasks} from "components/todolists/Tasks";

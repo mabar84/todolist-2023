@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {TasksActionsType, tasksReducer} from "reducers/tasks-reducer";
-import {TodolistsActionsType, todolistsReducer} from "reducers/todolists-reducer";
+import {TasksActionsType, tasksReducer} from "reducers/tasksSlice";
+import {TodolistsActionsType, todolistsReducer} from "reducers/todolistsSlice";
 import {appReducer} from "reducers/app-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 

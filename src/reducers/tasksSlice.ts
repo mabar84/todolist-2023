@@ -1,8 +1,8 @@
-import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateAPITaskModelType} from '../api/todolist-api'
+import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateAPITaskModelType} from 'api/todolist-api'
 import {Dispatch} from 'redux'
-import {AppActionsType, AppRootStateType} from '../state/store'
-import {appActions, RequestStatusType} from './app-reducer';
-import {handleNetworkAppError, handleServerAppError} from '../utils/error-utils';
+import {AppActionsType, AppRootStateType} from 'state/store'
+import {handleNetworkAppError, handleServerAppError} from 'utils/error-utils';
+import {appActions, RequestStatusType} from "reducers/app-reducer";
 
 const initialState: TasksDomainType = {
     // [todolistId1]: [
@@ -21,24 +21,24 @@ const initialState: TasksDomainType = {
 
 export const tasksReducer = (state: TasksDomainType = initialState, action: AppActionsType): TasksDomainType => {
     switch (action.type) {
-        case 'ADD-TODOLIST':
-            return {...state, [action.todolist.id]: []}
-        case 'SET-TODOLISTS': {
-            const stateCopy = {...state}
-            action.todolists.forEach((tl) => {
-                stateCopy[tl.id] = []
-            })
-            return stateCopy
-        }
-        case 'REMOVE-TODOLIST': {
-            const stateCopy = {...state}
-            delete stateCopy[action.id]
-            return stateCopy
-        }
+        // case 'ADD-TODOLIST':
+        //     return {...state, [action.todolist.id]: []}
+        // case 'SET-TODOLISTS': {
+        //     const stateCopy = {...state}
+        //     action.todolists.forEach((tl) => {
+        //         stateCopy[tl.id] = []
+        //     })
+        //     return stateCopy
+        // }
+        // case 'REMOVE-TODOLIST': {
+        //     const stateCopy = {...state}
+        //     delete stateCopy[action.id]
+        //     return stateCopy
+        // }
         case 'SET-TASKS':
             return {
                 ...state,
-                [action.payload.todolistId]: action.payload.tasks.map((t) => ({...t, entityStatus: 'idle'}))
+                [action.payload.todolistId]: action.payload.tasks.map((t: any) => ({...t, entityStatus: 'idle'}))
             }
         case 'ADD-TASK':
             return {

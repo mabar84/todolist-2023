@@ -10,7 +10,7 @@ import {Typography} from '@mui/material';
 import {RequestStatusType} from "reducers/app-reducer";
 import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
 import {AppRootStateType} from "state/store";
-import {addTodolistTC, getTodolistsTC, TodolistDomainType} from "reducers/todolists-reducer";
+import {addTodolistTC, getTodolistsTC, TodolistDomainType} from "reducers/todolistsSlice";
 import {AddItem} from "components/add-item/AddItem";
 import {Todolist} from "components/todolists/Todolist";
 
@@ -21,7 +21,7 @@ export const App = () => {
         dispatch(getTodolistsTC())
     }, [])
 
-    const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
+    const todolists = useSelector<AppRootStateType, TodolistDomainType[]>(state => state.todolists.todolists)
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const addTodolist = (title: string) => dispatch(addTodolistTC(title))
 

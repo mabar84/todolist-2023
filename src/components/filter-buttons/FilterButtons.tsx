@@ -1,7 +1,7 @@
 import React from 'react';
 import {styled} from 'styled-components';
 import {Button} from './Button';
-import {FilterType} from '../../reducers/todolists-reducer';
+import {FilterType} from 'reducers/todolistsSlice';
 
 export type FilterButtonsPropsType = {
     setFilter: (f: FilterType) => void
