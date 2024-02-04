@@ -1,6 +1,6 @@
 import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateAPITaskModelType} from 'api/todolist-api'
 import {Dispatch} from 'redux'
-import {AppActionsType, AppRootStateType} from 'state/store'
+import {AppRootStateType} from 'state/store'
 import {handleNetworkAppError, handleServerAppError} from 'utils/error-utils';
 import {appActions, RequestStatusType} from "reducers/app-reducer";
 
@@ -19,7 +19,7 @@ const initialState: TasksDomainType = {
     // ],
 }
 
-export const tasksReducer = (state: TasksDomainType = initialState, action: AppActionsType): TasksDomainType => {
+export const tasksReducer = (state: TasksDomainType = initialState, action: any): TasksDomainType => {
     switch (action.type) {
         // case 'ADD-TODOLIST':
         //     return {...state, [action.todolist.id]: []}
