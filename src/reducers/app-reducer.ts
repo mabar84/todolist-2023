@@ -1,28 +1,24 @@
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-const initialState = {
-    status: 'loading' as RequestStatusType,
-    error: null as null | string
-}
-
-type InitialStateType = typeof initialState
-
-export const appReducer = (state: InitialStateType = initialState, action: AppReducerActionsType): InitialStateType => {
-    switch (action.type) {
-        case 'APP/SET-STATUS':
-            return {...state, status: action.status}
-        case 'APP/SET-ERROR':
-            return {...state, error: action.error}
-        default:
-            return state
+export const slice = createSlice({
+    name: 'app',
+    initialState: {
+        status: 'loading' as RequestStatusType,
+        error: null as null | string
+    },
+    reducers: {
+        setStatus: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
+            state.status = action.payload.status
+        },
+        setError: (state, action: PayloadAction<{ error: null | string }>) => {
+            state.error = action.payload.error
+        }
     }
-}
-/////////////////   actionsCreators
-export const setAppStatus = (status: RequestStatusType) => ({type: 'APP/SET-STATUS' as const, status})
-export const setAppError = (error: null | string) => ({type: 'APP/SET-ERROR' as const, error})
+})
+export const appActions = slice.actions
+export const appReducer = slice.reducer
+
 ///////////////   thunksCreators
 
 ///////////////   types
-export type AppReducerActionsType =
-    | ReturnType<typeof setAppStatus>
-    | ReturnType<typeof setAppError>
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

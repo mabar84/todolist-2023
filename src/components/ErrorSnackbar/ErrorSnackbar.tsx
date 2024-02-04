@@ -1,19 +1,18 @@
 import React, {useState} from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import {AppRootStateType, useAppDispatch} from '../../state/store';
-import {setAppError} from '../../reducers/app-reducer';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType, useAppDispatch} from "state/store";
+import {appActions} from "reducers/app-reducer";
 
 export const ErrorSnackbar = () => {
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
 
     const error = useSelector<AppRootStateType, null | string>(state => state.app.error)
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         // if (reason === 'clickaway') return
-
-        dispatch(setAppError(null))
+        dispatch(appActions.setError({error: null}))
     }
     return (
         <Snackbar open={!!error} autoHideDuration={5000} onClose={handleClose}>

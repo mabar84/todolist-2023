@@ -1,9 +1,5 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
-import {AppRootStateType, useAppDispatch} from './state/store';
-import {addTodolistTC, getTodolistsTC, TodolistDomainType} from './reducers/todolists-reducer';
-import {Todolist} from './components/todolists/Todolist';
-import {AddItem} from './components/add-item/AddItem';
 import s from './App.module.scss'
 import LinearProgress from '@mui/material/LinearProgress';
 import AppBar from '@mui/material/AppBar';
@@ -11,8 +7,12 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/icons-material/Menu';
 import {Typography} from '@mui/material';
-import {RequestStatusType} from './reducers/app-reducer';
-import {ErrorSnackbar} from './components/ErrorSnackbar/ErrorSnackbar';
+import {RequestStatusType} from "reducers/app-reducer";
+import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
+import {AppRootStateType, useAppDispatch} from "state/store";
+import {addTodolistTC, getTodolistsTC, TodolistDomainType} from "reducers/todolists-reducer";
+import {AddItem} from "components/add-item/AddItem";
+import {Todolist} from "components/todolists/Todolist";
 
 export const App = () => {
     const dispatch = useAppDispatch()
