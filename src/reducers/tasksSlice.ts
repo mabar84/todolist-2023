@@ -1,6 +1,5 @@
-import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateAPITaskModelType} from 'api/todolist-api'
+import {TaskPriorities, TaskStatuses, TaskType, todolistAPI} from 'api/todolist-api'
 import {Dispatch} from 'redux'
-import {AppRootStateType} from 'state/store'
 import {handleNetworkAppError, handleServerAppError} from 'utils/error-utils';
 import {appActions, RequestStatusType} from "reducers/app-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
@@ -50,21 +49,6 @@ export const _tasksReducer = (state: TasksDomainType = initialState, action: any
         //     delete stateCopy[action.id]
         //     return stateCopy
         // }
-        case 'SET-TASKS':
-            return {
-                ...state,
-                [action.payload.todolistId]: action.payload.tasks.map((t: any) => ({...t, entityStatus: 'idle'}))
-            }
-        case 'ADD-TASK':
-            return {
-                ...state, [action.payload.task.todoListId]:
-                    [{...action.payload.task, entityStatus: 'idle'}, ...state[action.payload.task.todoListId]]
-            }
-        case 'REMOVE-TASK':
-            return {
-                ...state, [action.payload.todolistId]:
-                    state[action.payload.todolistId].filter(t => t.id !== action.payload.taskId)
-            }
         case 'UPDATE-TASK':
             return {
                 ...state, [action.payload.todolistId]:
@@ -82,28 +66,28 @@ export const _tasksReducer = (state: TasksDomainType = initialState, action: any
     }
 }
 export type TasksActionsType =
-    | ReturnType<typeof addTaskAC>
-    | ReturnType<typeof removeTaskAC>
-    | ReturnType<typeof setTasksAC>
+// | ReturnType<typeof addTaskAC>
+// | ReturnType<typeof removeTaskAC>
+// | ReturnType<typeof setTasksAC>
     | ReturnType<typeof updateTaskAC>
     | ReturnType<typeof changeTaskEntityStatusAC>
 
 /////////////////   actionsCreators
-export const addTaskAC = (task: TaskType) => ({type: 'ADD-TASK' as const, payload: {task}})
-export const removeTaskAC = (todolistId: string, taskId: string) =>
-    ({type: 'REMOVE-TASK' as const, payload: {todolistId, taskId}})
-const setTasksAC = (todolistId: string, tasks: TaskType[]) =>
-    ({type: 'SET-TASKS' as const, payload: {todolistId, tasks}})
+// export const addTaskAC = (task: TaskType) => ({type: 'ADD-TASK' as const, payload: {task}})
+// export const removeTaskAC = (todolistId: string, taskId: string) =>
+//     ({type: 'REMOVE-TASK' as const, payload: {todolistId, taskId}})
+// const setTasksAC = (todolistId: string, tasks: TaskType[]) =>
+//     ({type: 'SET-TASKS' as const, payload: {todolistId, tasks}})
 export const updateTaskAC = (todolistId: string, taskId: string, model: UpdateDomainTaskModelType) =>
     ({type: 'UPDATE-TASK' as const, payload: {todolistId, taskId, model}})
 export const changeTaskEntityStatusAC = (todolistId: string, taskId: string, entityStatus: RequestStatusType) =>
     ({type: 'CHANGE-TASK-ENTITY-STATUS' as const, todolistId, taskId, entityStatus})
 ///////////////   thunksCreators
-export const getTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
+export const getTasksTC = (id: string) => (dispatch: Dispatch) => {
     dispatch(appActions.setStatus({status: 'loading'}))
-    todolistAPI.getTasks(todolistId)
+    todolistAPI.getTasks(id)
         .then(res => {
-            dispatch(setTasksAC(todolistId, res.data.items))
+            dispatch(tasksActions.setTasks({id, tasks: res.data.items}))
             dispatch(appActions.setStatus({status: 'succeeded'}))
         })
         .catch((error) => {
@@ -116,7 +100,7 @@ export const removeTaskTC = (todolistId: string, taskId: string) => (dispatch: D
     todolistAPI.deleteTask(todolistId, taskId)
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(removeTaskAC(todolistId, taskId))
+                dispatch(tasksActions.removeTask({todolistId, taskId}))
                 dispatch(appActions.setStatus({status: 'succeeded'}))
             } else {
                 dispatch(changeTaskEntityStatusAC(todolistId, taskId, 'idle'))
@@ -134,7 +118,7 @@ export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispa
     todolistAPI.createTask(todolistId, title)
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(addTaskAC(res.data.data.item))
+                dispatch(tasksActions.addTask({task: res.data.data.item}))
                 dispatch(appActions.setStatus({status: 'succeeded'}))
             } else {
                 handleServerAppError(res.data, dispatch)

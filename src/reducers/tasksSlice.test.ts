@@ -1,4 +1,4 @@
-import {addTaskAC, removeTaskAC, TasksDomainType, tasksReducer,} from 'reducers/tasksSlice'
+import {tasksActions, TasksDomainType, tasksReducer} from 'reducers/tasksSlice'
 
 let startState: TasksDomainType
 
@@ -77,7 +77,7 @@ beforeEach(() => {
     }
 })
 test('correct task should be deleted from correct array', () => {
-    const endState = tasksReducer(startState, removeTaskAC('todolistId2', '2'))
+    const endState = tasksReducer(startState, tasksActions.removeTask({todolistId: 'todolistId2', taskId: '2'}))
 
     expect(endState).toEqual({
         'todolistId1': [
@@ -156,7 +156,7 @@ test('correct task should be added to correct array', () => {
         addedDate: '',
         entityStatus: 'idle'
     }
-    const endState = tasksReducer(startState, addTaskAC(newTask))
+    const endState = tasksReducer(startState, tasksActions.addTask({task: newTask}))
 
     expect(endState['todolistId1'].length).toBe(3)
     expect(endState['todolistId2'].length).toBe(4)

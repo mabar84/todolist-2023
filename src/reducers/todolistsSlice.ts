@@ -41,7 +41,6 @@ const slice = createSlice({
                 state.todolists[index].entityStatus = action.payload.entityStatus
             }
         },
-
     },
     selectors: {
         todolists: sliceState => sliceState.todolists
