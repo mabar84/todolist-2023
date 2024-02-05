@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {styled} from 'styled-components';
 import s from './Todolist.module.scss';
 import {useDispatch} from "react-redux";
-import {removeTaskTC, TaskDomainType} from "reducers/tasksSlice";
+import {removeTaskTC, TaskDomainType, updateTaskTC} from "reducers/tasksSlice";
 import {EditableSpan} from "components/editable-span/EditableSpan";
 
 type TaskPropsType = {
@@ -14,17 +14,17 @@ export const Task: React.FC<TaskPropsType> = ({task}) => {
     const deleteTask = () => dispatch(removeTaskTC(task.todoListId, task.id))
     const updateTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
         const status = e.currentTarget.checked ? 2 : 0
-        //dispatch(updateTaskTC(task.todoListId, task.id, {status}))
+        dispatch(updateTaskTC(task.todoListId, task.id, {status}))
     }
-    //const updateTaskTitle = (title: string) => dispatch(updateTaskTC(task.todoListId, task.id, {title}))
+    const updateTaskTitle = (title: string) => dispatch(updateTaskTC(task.todoListId, task.id, {title}))
+
     const taskClassName = s.task + (task.status ? ' ' + s.isDone : '') + (task.entityStatus === 'loading' ? ' ' + s.disabled : '')
-    // const taskClassName = s.task
 
     return (
         <StyledTask className={taskClassName}>
             <div>
                 <input type={'checkbox'} checked={!!task.status} onChange={updateTaskStatus}/>
-                {/*<EditableSpan updateItemTitle={updateTaskTitle} title={task.title}/>*/}
+                <EditableSpan updateItemTitle={updateTaskTitle} title={task.title}/>
             </div>
             <button onClick={deleteTask}>Del</button>
         </StyledTask>
