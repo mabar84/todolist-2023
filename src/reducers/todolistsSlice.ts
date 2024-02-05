@@ -14,7 +14,6 @@ const slice = createSlice({
             state.todolists = action.payload.todolists.map(tl => ({...tl, entityStatus: 'idle', filter: 'all'}))
         },
         addTodolist: (state, action: PayloadAction<{ todolist: TodolistType }>) => {
-            // return action.payload.todolists.map(tl => ({...tl, entityStatus: 'idle', filter: 'all'}))
             state.todolists.unshift({...action.payload.todolist, filter: 'all', entityStatus: 'idle'})
         },
         removeTodolist: (state, action: PayloadAction<{ id: string }>) => {
@@ -29,12 +28,12 @@ const slice = createSlice({
                 state.todolists[index].title = action.payload.title
             }
         },
-        changeTodolistFilter: (state, action: PayloadAction<{ id: string, filter: FilterType }>) => {
-            const index = state.todolists.findIndex((tl) => tl.id === action.payload.id)
-            if (index > -1) {
-                state.todolists[index].filter = action.payload.filter
-            }
-        },
+        // changeTodolistFilter: (state, action: PayloadAction<{ id: string, filter: FilterType }>) => {
+        //     const index = state.todolists.findIndex((tl) => tl.id === action.payload.id)
+        //     if (index > -1) {
+        //         state.todolists[index].filter = action.payload.filter
+        //     }
+        // },
         changeTodolistEntityStatus: (state, action: PayloadAction<{ id: string, entityStatus: RequestStatusType }>) => {
             const index = state.todolists.findIndex((tl) => tl.id === action.payload.id)
             if (index > -1) {

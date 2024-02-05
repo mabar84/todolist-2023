@@ -4,6 +4,7 @@ import {handleNetworkAppError, handleServerAppError} from 'utils/error-utils';
 import {appActions, RequestStatusType} from "reducers/app-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppRootStateType} from "state/store";
+import {todolistsActions} from "reducers/todolistsSlice";
 
 const slice = createSlice({
     name: 'tasks',
@@ -41,6 +42,20 @@ const slice = createSlice({
                 state[action.payload.todolistId][index].entityStatus = action.payload.entityStatus
             }
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(todolistsActions.setTodolists, (state, action) => {
+                action.payload.todolists.forEach((tl) => {
+                    state[tl.id] = []
+                })
+            })
+            .addCase(todolistsActions.addTodolist, (state, action) => {
+                state[action.payload.todolist.id] = []
+            })
+            .addCase(todolistsActions.removeTodolist, (state, action) => {
+                delete state[action.payload.id]
+            })
     },
     selectors: {
         tasks: sliceState => sliceState.tasks

@@ -10,7 +10,7 @@ type TasksPropsType = {
 export const Tasks = (props: TasksPropsType) => {
     return (
         <StyledTasks>
-            {props.tasks?.map((el) => <Task key={el.id} task={el}/>)}
+            {props.tasks.map((el) => <Task key={el.id} task={el}/>)}
         </StyledTasks>
     );
 };

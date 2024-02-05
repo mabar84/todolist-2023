@@ -7,9 +7,8 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/icons-material/Menu';
 import {Typography} from '@mui/material';
-import {RequestStatusType} from "reducers/app-reducer";
+import {appSelectors} from "reducers/app-reducer";
 import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
-import {AppRootStateType} from "state/store";
 import {addTodolistTC, getTodolistsTC, todolistsSelectors} from "reducers/todolistsSlice";
 import {AddItem} from "components/add-item/AddItem";
 import {Todolist} from "components/todolists/Todolist";
@@ -22,7 +21,7 @@ export const App = () => {
     }, [])
 
     const todolists = useSelector(todolistsSelectors.todolists)
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const status = useSelector(appSelectors.status)
     const addTodolist = (title: string) => dispatch(addTodolistTC(title))
 
     return (
