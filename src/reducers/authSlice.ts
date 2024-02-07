@@ -30,6 +30,8 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(appActions.setStatus({status: 'succeeded'}))
+                dispatch(authActions.setIsLoggedIn({isLoggedIn: true}))
+
             } else {
                 handleServerAppError(res.data, dispatch)
             }

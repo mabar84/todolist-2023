@@ -13,11 +13,16 @@ import {getTodolistsTC} from "reducers/todolistsSlice";
 import {Navigate, Route, Routes} from "react-router-dom";
 import TodolistList from "components/todolists/TodolistList";
 import {Login} from "components/login/Login";
+import {authSelectors} from "reducers/authSlice";
 
 export const App = () => {
     const dispatch = useDispatch()
+    const isLoggedIn = useSelector(authSelectors.isLoggedIn)
 
     useEffect(() => {
+        if (!isLoggedIn) {
+            return
+        }
         dispatch(getTodolistsTC())
     }, [])
 

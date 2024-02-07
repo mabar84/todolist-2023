@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 export const slice = createSlice({
     name: 'app',
     initialState: {
-        status: 'loading' as RequestStatusType,
+        status: 'idle' as RequestStatusType,
         error: null as null | string
     },
     reducers: {
