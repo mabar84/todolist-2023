@@ -60,7 +60,7 @@ export const getTodolistsTC = () => async (dispatch: Dispatch) => {
     }
 }
 export const addTodolistTC = (title: string) => (dispatch: Dispatch) => {
-    // dispatch(setAppStatus('loading'))
+    dispatch(appActions.setStatus({status: 'loading'}))
     todolistAPI.createTodolist(title)
         .then(res => {
             if (res.data.resultCode === 0) {

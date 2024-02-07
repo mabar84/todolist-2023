@@ -25,7 +25,18 @@ export const todolistAPI = {
         instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, model),
 }
 
+
+export const authAPI = {
+    login: (loginParams: LoginParamsType) => instance.post('/auth/login', loginParams)
+}
 ///////////////   types
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: boolean
+}
+
 export type ResponseType<T = {}> = {
     data: T
     messages: string[]
