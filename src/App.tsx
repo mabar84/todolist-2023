@@ -6,12 +6,13 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/icons-material/Menu';
-import {Typography} from '@mui/material';
+import Typography from '@mui/material/Typography';
 import {appSelectors} from "reducers/app-reducer";
 import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
-import {addTodolistTC, getTodolistsTC, todolistsSelectors} from "reducers/todolistsSlice";
-import {AddItem} from "components/add-item/AddItem";
-import {Todolist} from "components/todolists/Todolist";
+import {getTodolistsTC} from "reducers/todolistsSlice";
+import {Navigate, Route, Routes} from "react-router-dom";
+import TodolistList from "components/todolists/TodolistList";
+import {Login} from "components/login/Login";
 
 export const App = () => {
     const dispatch = useDispatch()
@@ -20,9 +21,7 @@ export const App = () => {
         dispatch(getTodolistsTC())
     }, [])
 
-    const todolists = useSelector(todolistsSelectors.todolists)
     const status = useSelector(appSelectors.status)
-    const addTodolist = (title: string) => dispatch(addTodolistTC(title))
 
     return (
         <div className={s.App}>
@@ -40,10 +39,12 @@ export const App = () => {
                     {status === 'loading' && <LinearProgress color={'secondary'}/>}
                 </div>
             </AppBar>
-            <AddItem callBack={addTodolist}/>
-            <div className={s.todolists}>
-                {todolists.map(tl => <Todolist key={tl.id} todolist={tl}/>)}
-            </div>
+            <Routes>
+                <Route path='' element={<TodolistList/>}/>
+                <Route path='login' element={<Login/>}/>
+                <Route path='404' element={<h1>404</h1>}/>
+                <Route path='*' element={<Navigate to={'404'}/>}/>
+            </Routes>
         </div>
     );
 };
