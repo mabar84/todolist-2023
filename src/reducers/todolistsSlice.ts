@@ -51,6 +51,7 @@ export const todolistsSelectors = slice.selectors
 
 /////////////////   thunkCreators
 export const getTodolistsTC = () => async (dispatch: Dispatch) => {
+    dispatch(appActions.setStatus({status: 'loading'}))
     try {
         const res = await todolistAPI.getTodolists()
         dispatch(todolistsActions.setTodolists({todolists: res.data}))

@@ -27,6 +27,7 @@ export const todolistAPI = {
 
 
 export const authAPI = {
+    me: () => instance.get<ResponseType>('/auth/me'),
     login: (loginParams: LoginParamsType) => instance.post('/auth/login', loginParams)
 }
 ///////////////   types

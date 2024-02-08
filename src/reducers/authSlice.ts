@@ -7,23 +7,40 @@ import {handleNetworkAppError, handleServerAppError} from "utils/error-utils";
 const slice = createSlice({
     name: 'auth',
     initialState: {
-        isLoggedIn: false
+        isLoggedIn: false,
+        isInitialized: false
     },
     reducers: {
         setIsLoggedIn: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
             state.isLoggedIn = action.payload.isLoggedIn
+        },
+        setIsInitialized: (state, action: PayloadAction<{ isInitialized: boolean }>) => {
+            state.isInitialized = action.payload.isInitialized
         }
     },
     selectors: {
-        isLoggedIn: sliceState => sliceState.isLoggedIn
+        isLoggedIn: sliceState => sliceState.isLoggedIn,
+        isInitialized: sliceState => sliceState.isInitialized
     }
 })
 export const authReducer = slice.reducer
 export const authActions = slice.actions
 export const authSelectors = slice.selectors
 
-
 // thunks
+export const initializeAppTC = () => (dispatch: Dispatch) => {
+
+    authAPI.me().then(res => {
+        dispatch(authActions.setIsInitialized({isInitialized: true}))
+        if (res.data.resultCode === 0) {
+            // dispatch(appActions.setStatus({status: 'succeeded'}))
+            dispatch(authActions.setIsLoggedIn({isLoggedIn: true}))
+        } else {
+            handleServerAppError(res.data, dispatch)
+        }
+    })
+}
+
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
     dispatch(appActions.setStatus({status: 'loading'}))
     authAPI.login(data)

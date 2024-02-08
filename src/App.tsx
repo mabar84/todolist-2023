@@ -9,25 +9,27 @@ import Menu from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import {appSelectors} from "reducers/app-reducer";
 import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
-import {getTodolistsTC} from "reducers/todolistsSlice";
 import {Navigate, Route, Routes} from "react-router-dom";
 import TodolistList from "components/todolists/TodolistList";
 import {Login} from "components/login/Login";
-import {authSelectors} from "reducers/authSlice";
+import {authSelectors, initializeAppTC} from "reducers/authSlice";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const App = () => {
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector(authSelectors.isLoggedIn)
-
-    useEffect(() => {
-        if (!isLoggedIn) {
-            return
-        }
-        dispatch(getTodolistsTC())
-    }, [])
-
+    const isInitialized = useSelector(authSelectors.isInitialized)
     const status = useSelector(appSelectors.status)
 
+    useEffect(() => {
+        dispatch(initializeAppTC())
+    }, [])
+
+    if (!isInitialized) {
+        return <div
+            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
+        </div>
+    }
     return (
         <div className={s.App}>
             <ErrorSnackbar/>
