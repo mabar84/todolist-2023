@@ -28,7 +28,8 @@ export const todolistAPI = {
 
 export const authAPI = {
     me: () => instance.get<ResponseType>('/auth/me'),
-    login: (loginParams: LoginParamsType) => instance.post('/auth/login', loginParams)
+    login: (loginParams: LoginParamsType) => instance.post('/auth/login', loginParams),
+    logout: () => instance.delete<ResponseType>('/auth/login')
 }
 ///////////////   types
 export type LoginParamsType = {
@@ -37,7 +38,6 @@ export type LoginParamsType = {
     rememberMe: boolean
     captcha?: boolean
 }
-
 export type ResponseType<T = {}> = {
     data: T
     messages: string[]

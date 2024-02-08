@@ -10,10 +10,8 @@ import {Navigate} from "react-router-dom";
 const TodolistList = () => {
     const todolists = useSelector(todolistsSelectors.todolists)
     const isLoggedIn = useSelector(authSelectors.isLoggedIn)
-
     const dispatch = useDispatch()
     const addTodolist = (title: string) => dispatch(addTodolistTC(title))
-
 
     useEffect(() => {
         if (!isLoggedIn) {
