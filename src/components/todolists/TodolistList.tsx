@@ -20,7 +20,6 @@ const TodolistList = () => {
         dispatch(getTodolistsTC())
     }, [])
 
-
     if (!isLoggedIn) {
         return <Navigate to={'/login'}/>
     }
