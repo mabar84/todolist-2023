@@ -1,4 +1,4 @@
-import {removeTask, tasksActions, TasksDomainType, tasksReducer, tasksThunks} from 'reducers/tasksSlice'
+import {tasksActions, TasksDomainType, tasksReducer} from 'reducers/tasksSlice'
 import {todolistsActions} from "reducers/todolistsSlice";
 import {TaskStatuses} from "api/todolist-api";
 
@@ -78,7 +78,11 @@ beforeEach(() => {
     }
 })
 // test('correct task should be deleted from correct array', () => {
-//     const endState = tasksReducer(startState, tasksThunks.removeTask({todolistId: 'todolistId2', taskId: '2'}))
+//     const endState = tasksReducer(startState, tasksThunks.removeTask.fulfilled({
+//         todolistId: 'todolistId2',
+//         taksId: '2'
+//     }) )
+//     // const endState = tasksReducer(startState, tasksActions.removeTask({todolistId: 'todolistId2', taskId: '2'}))
 //     expect(endState).toEqual({
 //         'todolistId1': [
 //             {

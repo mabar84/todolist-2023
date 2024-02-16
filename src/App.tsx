@@ -11,7 +11,7 @@ import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
 import {Navigate, Route, Routes} from "react-router-dom";
 import TodolistList from "components/todolists/TodolistList";
 import {Login} from "components/login/Login";
-import {authSelectors, initializeAppTC, logoutTC} from "reducers/authSlice";
+import {authSelectors, authThunks, initializeAppTC} from "reducers/authSlice";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 
@@ -32,7 +32,7 @@ export const App = () => {
         </div>
     }
     const logout = () => {
-        dispatch(logoutTC())
+        dispatch(authThunks.logout())
     }
     return (
         <div className={s.App}>

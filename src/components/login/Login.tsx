@@ -8,7 +8,7 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
-import {authSelectors, loginTC} from "reducers/authSlice";
+import {authSelectors, authThunks} from "reducers/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 
@@ -44,7 +44,9 @@ export const Login = () => {
         },
         onSubmit: (values) => {
             formik.resetForm();
-            dispatch(loginTC(values))
+            dispatch(authThunks.login(values))
+
+
             // alert(JSON.stringify(values, null, 2));
         },
     });

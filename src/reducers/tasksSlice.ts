@@ -82,7 +82,7 @@ const getTasks = createAsyncThunk<{ todolistId: string, tasks: TaskType[] }, str
         return rejectWithValue(null)
     }
 })
-export const removeTask = createAsyncThunk(`${slice.name}/removeTask`, async (arg: {
+const removeTask = createAsyncThunk(`${slice.name}/removeTask`, async (arg: {
     todolistId: string,
     taksId: string
 }, thunkAPI) => {
@@ -106,7 +106,7 @@ export const removeTask = createAsyncThunk(`${slice.name}/removeTask`, async (ar
                 entityStatus: 'idle'
             }))
             handleServerAppError(res.data, dispatch)
-            return {todolistId: arg.todolistId, taksId: arg.taksId}
+            return rejectWithValue(null)
         }
     } catch (error: any) {
         handleNetworkAppError(error, dispatch)

@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {styled} from 'styled-components';
 import s from './Todolist.module.scss';
 import {useDispatch} from "react-redux";
-import {removeTask, TaskDomainType, tasksThunks, updateTaskTC} from "reducers/tasksSlice";
+import {TaskDomainType, tasksThunks, updateTaskTC} from "reducers/tasksSlice";
 import {EditableSpan} from "components/editable-span/EditableSpan";
 
 type TaskPropsType = {
