@@ -1,13 +1,13 @@
 import {combineReducers} from 'redux';
 import {tasksReducer} from "reducers/tasksSlice";
 import {todolistsReducer} from "reducers/todolistsSlice";
-import {appReducer} from "reducers/app-reducer";
+import {appSLice} from "reducers/appSLice";
 import {configureStore} from "@reduxjs/toolkit";
 import {authReducer} from "reducers/authSlice";
 
 export const store = configureStore({
     reducer: combineReducers({
-        app: appReducer,
+        app: appSLice,
         tasks: tasksReducer,
         todolists: todolistsReducer,
         auth: authReducer

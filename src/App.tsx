@@ -6,7 +6,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/icons-material/Menu';
-import {appSelectors} from "reducers/app-reducer";
+import {appSelectors} from "reducers/appSLice";
 import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
 import {Navigate, Route, Routes} from "react-router-dom";
 import TodolistList from "components/todolists/TodolistList";

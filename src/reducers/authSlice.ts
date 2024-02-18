@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux'
-import {appActions} from "reducers/app-reducer";
+import {appActions} from "reducers/appSLice";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {authAPI} from "api/todolist-api";
+import {authAPI, LoginParamsType} from "api/todolist-api";
 import {handleNetworkAppError, handleServerAppError} from "utils/error-utils";
 import {todolistsActions} from "reducers/todolistsSlice";
 
@@ -36,6 +36,8 @@ const slice = createSlice({
 
 
 // thunks
+// const initializeApp=createAsyncThunk<any,any>
+
 export const initializeAppTC = () => (dispatch: Dispatch) => {
 
     authAPI.me().then(res => {
@@ -49,7 +51,9 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
     })
 }
 
-const login = createAsyncThunk<any, any>(`${slice.name}/login`, async (data, thunkAPI) => {
+const login = createAsyncThunk<{
+    isLoggedIn: boolean
+}, LoginParamsType>(`${slice.name}/login`, async (data, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI
     try {
         dispatch(appActions.setStatus({status: 'loading'}))
@@ -58,7 +62,6 @@ const login = createAsyncThunk<any, any>(`${slice.name}/login`, async (data, thu
             dispatch(appActions.setStatus({status: 'succeeded'}))
             return {isLoggedIn: true}
         } else {
-            debugger
             handleServerAppError(res.data, dispatch)
             return rejectWithValue(null)
         }

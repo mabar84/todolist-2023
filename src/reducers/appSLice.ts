@@ -15,13 +15,12 @@ export const slice = createSlice({
         }
     },
     selectors: {
-        // todolists: sliceState => sliceState.todolists,
         status: sliceState => sliceState.status,
         error: sliceState => sliceState.error,
     }
 })
 export const appActions = slice.actions
-export const appReducer = slice.reducer
+export const appSLice = slice.reducer
 export const appSelectors = slice.selectors
 
 ///////////////   thunksCreators
