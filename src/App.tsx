@@ -11,7 +11,7 @@ import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
 import {Navigate, Route, Routes} from "react-router-dom";
 import TodolistList from "components/todolists/TodolistList";
 import {Login} from "components/login/Login";
-import {authSelectors, authThunks, initializeAppTC} from "reducers/authSlice";
+import {authSelectors, authThunks} from "reducers/authSlice";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 
@@ -22,7 +22,7 @@ export const App = () => {
     const status = useSelector(appSelectors.status)
 
     useEffect(() => {
-        dispatch(initializeAppTC())
+        dispatch(authThunks.initializeApp())
     }, [])
 
     if (!isInitialized) {

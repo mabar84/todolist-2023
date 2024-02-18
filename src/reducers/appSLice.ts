@@ -23,7 +23,5 @@ export const appActions = slice.actions
 export const appSLice = slice.reducer
 export const appSelectors = slice.selectors
 
-///////////////   thunksCreators
-
 ///////////////   types
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
