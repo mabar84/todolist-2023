@@ -162,7 +162,13 @@ test('correct task should be added to correct array', () => {
         addedDate: '',
         entityStatus: 'idle'
     }
-    const endState = tasksReducer(startState, tasksActions.addTask({task: newTask}))
+    const action = {
+        type: tasksThunks.addTask.fulfilled.type,
+        payload: {
+            task: newTask
+        }
+    }
+    const endState = tasksReducer(startState, action)
     expect(endState['todolistId1'].length).toBe(3)
     expect(endState['todolistId2'].length).toBe(4)
     expect(endState['todolistId2'][0].id).toBeDefined()

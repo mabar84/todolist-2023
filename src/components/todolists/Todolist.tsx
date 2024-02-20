@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import s from './Todolist.module.scss'
 import {AppRootStateType} from "state/store";
 import {FilterType, removeTodolistTC, TodolistDomainType, updateTodolistTitleTC} from "reducers/todolistsSlice";
-import {addTaskTC, TaskDomainType, tasksThunks} from "reducers/tasksSlice";
+import {TaskDomainType, tasksThunks} from "reducers/tasksSlice";
 import {EditableSpan} from "components/editable-span/EditableSpan";
 import {AddItem} from "components/add-item/AddItem";
 import {Tasks} from "components/todolists/Tasks";
@@ -26,7 +26,8 @@ export const Todolist = (props: TodolistPropsType) => {
 
     const deleteTodolist = () => dispatch(removeTodolistTC(props.todolist.id))
     const updateTodolistTitle = (title: string) => dispatch(updateTodolistTitleTC(props.todolist.id, title))
-    const addTask = (title: string) => dispatch(addTaskTC(props.todolist.id, title))
+    // const addTask = (title: string) => dispatch(addTaskTC(props.todolist.id, title))
+    const addTask = (title: string) => dispatch(tasksThunks.addTask({todolistId: props.todolist.id, title}))
     const todolistClassName = s.todolist + (props.todolist.entityStatus === 'loading' ? ' ' + s.disabled : '')
 
     const filterTasks = () => {
