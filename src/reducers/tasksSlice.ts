@@ -83,10 +83,8 @@ const getTasks = createAsyncThunk<{ todolistId: string, tasks: TaskType[] }, str
         return rejectWithValue(null)
     }
 })
-const removeTask = createAsyncThunk(`${slice.name}/removeTask`, async (arg: {
-    todolistId: string,
-    taksId: string
-}, thunkAPI) => {
+const removeTask = createAsyncThunk<{ todolistId: string, taksId: string }, { todolistId: string, taksId: string }>
+(`${slice.name}/removeTask`, async (arg, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI
     try {
         dispatch(appActions.setStatus({status: 'loading'}))
@@ -133,25 +131,25 @@ const removeTask = createAsyncThunk(`${slice.name}/removeTask`, async (arg: {
 //         })
 // }
 
-const addTask = createAsyncThunk<{ task: TaskType }, { todolistId: string, title: string }>(`${slice.name}/addTask`,
-    async (arg, thunkAPI) => {
-        const {dispatch, rejectWithValue} = thunkAPI
-        try {
-            dispatch(appActions.setStatus({status: 'loading'}))
-            dispatch(appActions.setStatus({status: 'loading'}))
-            const res = await todolistAPI.createTask(arg.todolistId, arg.title)
-            if (res.data.resultCode === 0) {
-                dispatch(appActions.setStatus({status: 'succeeded'}))
-                return {task: res.data.data.item}
-            } else {
-                handleServerAppError(res.data, dispatch)
-                return rejectWithValue(null)
-            }
-        } catch (error: any) {
-            handleNetworkAppError(error, dispatch)
+const addTask = createAsyncThunk<{ task: TaskType }, { todolistId: string, title: string }>
+(`${slice.name}/addTask`, async (arg, thunkAPI) => {
+    const {dispatch, rejectWithValue} = thunkAPI
+    try {
+        dispatch(appActions.setStatus({status: 'loading'}))
+        dispatch(appActions.setStatus({status: 'loading'}))
+        const res = await todolistAPI.createTask(arg.todolistId, arg.title)
+        if (res.data.resultCode === 0) {
+            dispatch(appActions.setStatus({status: 'succeeded'}))
+            return {task: res.data.data.item}
+        } else {
+            handleServerAppError(res.data, dispatch)
             return rejectWithValue(null)
         }
-    })
+    } catch (error: any) {
+        handleNetworkAppError(error, dispatch)
+        return rejectWithValue(null)
+    }
+})
 
 // export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
 //     dispatch(appActions.setStatus({status: 'loading'}))
