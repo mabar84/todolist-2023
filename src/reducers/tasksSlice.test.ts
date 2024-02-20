@@ -1,4 +1,4 @@
-import {tasksActions, TasksDomainType, tasksReducer} from 'reducers/tasksSlice'
+import {tasksActions, TasksDomainType, tasksReducer, tasksThunks} from 'reducers/tasksSlice'
 import {todolistsActions} from "reducers/todolistsSlice";
 import {TaskStatuses} from "api/todolist-api";
 
@@ -77,74 +77,77 @@ beforeEach(() => {
         ]
     }
 })
-// test('correct task should be deleted from correct array', () => {
-//     const endState = tasksReducer(startState, tasksThunks.removeTask.fulfilled({
-//         todolistId: 'todolistId2',
-//         taksId: '2'
-//     }) )
-//     // const endState = tasksReducer(startState, tasksActions.removeTask({todolistId: 'todolistId2', taskId: '2'}))
-//     expect(endState).toEqual({
-//         'todolistId1': [
-//             {
-//                 id: '1', title: 'CSS', status: 0,
-//                 description: '',
-//                 todoListId: 'todolistId1',
-//                 order: 0,
-//                 priority: 0,
-//                 startDate: '',
-//                 deadline: '',
-//                 addedDate: '',
-//                 entityStatus: 'idle'
-//             },
-//             {
-//                 id: '2', title: 'JS', status: 2,
-//                 description: '',
-//                 todoListId: 'todolistId1',
-//                 order: 0,
-//                 priority: 0,
-//                 startDate: '',
-//                 deadline: '',
-//                 addedDate: '',
-//                 entityStatus: 'idle'
-//             },
-//             {
-//                 id: '3', title: 'React', status: 0,
-//                 description: '',
-//                 todoListId: 'todolistId1',
-//                 order: 0,
-//                 priority: 0,
-//                 startDate: '',
-//                 deadline: '',
-//                 addedDate: '',
-//                 entityStatus: 'idle'
-//             }
-//         ],
-//         'todolistId2': [
-//             {
-//                 id: '1', title: 'bread', status: 0,
-//                 description: '',
-//                 todoListId: 'todolistId2',
-//                 order: 0,
-//                 priority: 0,
-//                 startDate: '',
-//                 deadline: '',
-//                 addedDate: '',
-//                 entityStatus: 'idle'
-//             },
-//             {
-//                 id: '3', title: 'tea', status: 0,
-//                 description: '',
-//                 todoListId: 'todolistId2',
-//                 order: 0,
-//                 priority: 0,
-//                 startDate: '',
-//                 deadline: '',
-//                 addedDate: '',
-//                 entityStatus: 'idle'
-//             }
-//         ]
-//     })
-// })
+test('correct task should be deleted from correct array', () => {
+    const action = {
+        type: tasksThunks.removeTask.fulfilled.type,
+        payload: {
+            todolistId: 'todolistId2',
+            taksId: '2'
+        }
+    }
+    const endState = tasksReducer(startState, action)
+    expect(endState).toEqual({
+        'todolistId1': [
+            {
+                id: '1', title: 'CSS', status: 0,
+                description: '',
+                todoListId: 'todolistId1',
+                order: 0,
+                priority: 0,
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                entityStatus: 'idle'
+            },
+            {
+                id: '2', title: 'JS', status: 2,
+                description: '',
+                todoListId: 'todolistId1',
+                order: 0,
+                priority: 0,
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                entityStatus: 'idle'
+            },
+            {
+                id: '3', title: 'React', status: 0,
+                description: '',
+                todoListId: 'todolistId1',
+                order: 0,
+                priority: 0,
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                entityStatus: 'idle'
+            }
+        ],
+        'todolistId2': [
+            {
+                id: '1', title: 'bread', status: 0,
+                description: '',
+                todoListId: 'todolistId2',
+                order: 0,
+                priority: 0,
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                entityStatus: 'idle'
+            },
+            {
+                id: '3', title: 'tea', status: 0,
+                description: '',
+                todoListId: 'todolistId2',
+                order: 0,
+                priority: 0,
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                entityStatus: 'idle'
+            }
+        ]
+    })
+})
 test('correct task should be added to correct array', () => {
     const newTask = {
         id: '4',
