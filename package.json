@@ -69,6 +69,7 @@
     "@storybook/react": "7.6.7",
     "@storybook/react-webpack5": "7.6.7",
     "@storybook/test": "7.6.7",
+    "prettier": "3.2.5",
     "prop-types": "15.8.1",
     "storybook": "7.6.7",
     "webpack": "5.89.0"
