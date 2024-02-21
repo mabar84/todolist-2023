@@ -1,24 +1,24 @@
-import React from 'react';
-import {styled} from 'styled-components';
-import {FilterType} from 'reducers/todolistsSlice';
+import React from "react";
+import { styled } from "styled-components";
+import { FilterType } from "reducers/todolistsSlice";
 
 export type ButtonPropsType = {
-    buttonName: string
-    value: FilterType
-    filter: FilterType
-    setFilter: (filter: FilterType) => void;
-}
+  buttonName: string;
+  value: FilterType;
+  filter: FilterType;
+  setFilter: (filter: FilterType) => void;
+};
 
 export const Button = (props: ButtonPropsType) => {
-    let isActive = props.value === props.filter
-    const filterTasks = () => {
-        props.setFilter(props.value);
-    };
-    return (
-        <StyledButton onClick={filterTasks} className={isActive ? 'active' : ''}>
-            {props.buttonName}
-        </StyledButton>
-    );
+  let isActive = props.value === props.filter;
+  const filterTasks = () => {
+    props.setFilter(props.value);
+  };
+  return (
+    <StyledButton onClick={filterTasks} className={isActive ? "active" : ""}>
+      {props.buttonName}
+    </StyledButton>
+  );
 };
 
 const StyledButton = styled.button`
@@ -33,4 +33,4 @@ const StyledButton = styled.button`
   &.active {
     background: orange;
   }
-`
+`;
