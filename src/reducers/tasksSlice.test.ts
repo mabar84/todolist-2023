@@ -211,7 +211,7 @@ test("status of specified task should be changed", () => {
     payload: {
       todolistId: "todolistId2",
       taskId: "2",
-      model: { status: TaskStatuses.New },
+      domainModel: { status: TaskStatuses.New },
     },
   });
   expect(endState["todolistId2"][1].status).toBe(0);
@@ -223,7 +223,7 @@ test("title of task should be changed", () => {
     payload: {
       todolistId: "todolistId1",
       taskId: "3",
-      model: { title: "Vue" },
+      domainModel: { title: "Vue" },
     },
   });
   expect(endState["todolistId1"][2].title).toBe("Vue");

@@ -58,7 +58,7 @@ const slice = createSlice({
         if (index > -1) {
           state[action.payload.todolistId][index] = {
             ...state[action.payload.todolistId][index],
-            ...action.payload.model,
+            ...action.payload.domainModel,
           };
         }
       })
@@ -148,14 +148,11 @@ const addTask = createAsyncThunk<{ task: TaskType }, { todolistId: string; title
     }
   },
 );
-
 const updateTask = createAsyncThunk<
-  { todolistId: string; taskId: string; model: UpdateDomainTaskModelType },
-  // { todolistId: string; taskId: string; model: UpdateAPITaskModelType },
+  { todolistId: string; taskId: string; domainModel: UpdateDomainTaskModelType },
   { todolistId: string; taskId: string; domainModel: UpdateDomainTaskModelType }
 >(`${slice.name}/updateTask`, async (arg, thunkAPI) => {
   const { dispatch, rejectWithValue, getState } = thunkAPI;
-
   try {
     dispatch(appActions.setStatus({ status: "loading" }));
     const state = getState() as AppRootStateType;
@@ -179,11 +176,8 @@ const updateTask = createAsyncThunk<
     const res = await todolistAPI.updateTask(arg.todolistId, arg.taskId, APImodel);
 
     if (res.data.resultCode === 0) {
-      // dispatch(tasksActions.updateTask({ todolistId: arg.todolistId, taskId: arg.taskId, model: arg.domainModel }));
       dispatch(appActions.setStatus({ status: "succeeded" }));
-      // return { todolistId: arg.todolistId, taskId: arg.taskId, model: arg.domainModel };
-      // return { ...res.data.item };
-      return { todolistId: arg.todolistId, taskId: arg.taskId, model: arg.domainModel };
+      return { todolistId: arg.todolistId, taskId: arg.taskId, domainModel: arg.domainModel };
     } else {
       handleServerAppError(res.data, dispatch);
       return rejectWithValue(null);
@@ -193,37 +187,6 @@ const updateTask = createAsyncThunk<
     return rejectWithValue(null);
   }
 });
-
-// export const updateTaskTC =
-//   (todolistId: string, taskId: string, domainModel: UpdateDomainTaskModelType) =>
-//   (dispatch: Dispatch, getState: () => AppRootStateType) => {
-//     const task = getState().tasks[todolistId].find((t: any) => t.id === taskId);
-//     if (task) {
-//       const APImodel: UpdateAPITaskModelType = {
-//         title: task.title,
-//         deadline: task.deadline,
-//         description: task.description,
-//         status: task.status,
-//         priority: task.priority,
-//         startDate: task.startDate,
-//         ...domainModel,
-//       };
-//       dispatch(appActions.setStatus({ status: "loading" }));
-//       todolistAPI
-//         .updateTask(todolistId, taskId, APImodel)
-//         .then((res) => {
-//           if (res.data.resultCode === 0) {
-//             dispatch(tasksActions.updateTask({ todolistId, taskId, model: domainModel }));
-//             dispatch(appActions.setStatus({ status: "succeeded" }));
-//           } else {
-//             handleServerAppError(res.data, dispatch);
-//           }
-//         })
-//         .catch((error) => {
-//           handleNetworkAppError(error, dispatch);
-//         });
-//     }
-//   };
 ///////////////   types
 export type UpdateDomainTaskModelType = {
   title?: string;

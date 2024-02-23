@@ -5,11 +5,10 @@ import { useDispatch } from "react-redux";
 import { TaskDomainType, tasksThunks } from "reducers/tasksSlice";
 import { EditableSpan } from "components/editable-span/EditableSpan";
 
-type TaskPropsType = {
+type Props = {
   task: TaskDomainType;
 };
-
-export const Task: React.FC<TaskPropsType> = ({ task }) => {
+export const Task = ({ task }: Props) => {
   const dispatch = useDispatch();
   const deleteTask = () => dispatch(tasksThunks.removeTask({ todolistId: task.todoListId, taksId: task.id }));
   const updateTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,10 +17,7 @@ export const Task: React.FC<TaskPropsType> = ({ task }) => {
   };
   const updateTaskTitle = (title: string) => {
     dispatch(tasksThunks.updateTask({ todolistId: task.todoListId, taskId: task.id, domainModel: { title } }));
-
-    // dispatch(updateTaskTC(task.todoListId, task.id, { title }));
   };
-
   const taskClassName =
     s.task + (task.status ? " " + s.isDone : "") + (task.entityStatus === "loading" ? " " + s.disabled : "");
 
@@ -36,8 +32,4 @@ export const Task: React.FC<TaskPropsType> = ({ task }) => {
   );
 };
 
-const StyledTask = styled.li`
-  &.isDone {
-    opacity: 0.5;
-  }
-`;
+const StyledTask = styled.li``;
