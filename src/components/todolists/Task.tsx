@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 import { styled } from "styled-components";
 import s from "./Todolist.module.scss";
 import { useDispatch } from "react-redux";
-import { TaskDomainType, tasksThunks, updateTaskTC } from "reducers/tasksSlice";
+import { TaskDomainType, tasksThunks } from "reducers/tasksSlice";
 import { EditableSpan } from "components/editable-span/EditableSpan";
 
 type TaskPropsType = {
@@ -14,9 +14,13 @@ export const Task: React.FC<TaskPropsType> = ({ task }) => {
   const deleteTask = () => dispatch(tasksThunks.removeTask({ todolistId: task.todoListId, taksId: task.id }));
   const updateTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
     const status = e.currentTarget.checked ? 2 : 0;
-    dispatch(updateTaskTC(task.todoListId, task.id, { status }));
+    dispatch(tasksThunks.updateTask({ todolistId: task.todoListId, taskId: task.id, domainModel: { status } }));
   };
-  const updateTaskTitle = (title: string) => dispatch(updateTaskTC(task.todoListId, task.id, { title }));
+  const updateTaskTitle = (title: string) => {
+    dispatch(tasksThunks.updateTask({ todolistId: task.todoListId, taskId: task.id, domainModel: { title } }));
+
+    // dispatch(updateTaskTC(task.todoListId, task.id, { title }));
+  };
 
   const taskClassName =
     s.task + (task.status ? " " + s.isDone : "") + (task.entityStatus === "loading" ? " " + s.disabled : "");

@@ -1,4 +1,4 @@
-import { tasksActions, TasksDomainType, tasksReducer, tasksThunks } from "reducers/tasksSlice";
+import { TasksDomainType, tasksReducer, tasksThunks } from "reducers/tasksSlice";
 import { todolistsActions } from "reducers/todolistsSlice";
 import { TaskStatuses } from "api/todolist-api";
 
@@ -198,26 +198,34 @@ test("correct task should be added to correct array", () => {
   expect(endState["todolistId2"][0].status).toBe(0);
 });
 test("status of specified task should be changed", () => {
-  const endState = tasksReducer(
-    startState,
-    tasksActions.updateTask({
+  // const endState = tasksReducer(
+  //   startState,
+  //   tasksActions.updateTask({
+  //     todolistId: "todolistId2",
+  //     taskId: "2",
+  //     model: { status: TaskStatuses.New },
+  //   }),
+  // );
+  const endState = tasksReducer(startState, {
+    type: tasksThunks.updateTask.fulfilled.type,
+    payload: {
       todolistId: "todolistId2",
       taskId: "2",
       model: { status: TaskStatuses.New },
-    }),
-  );
+    },
+  });
   expect(endState["todolistId2"][1].status).toBe(0);
   expect(endState["todolistId2"][1].title).toBe("milk");
 });
 test("title of task should be changed", () => {
-  const endState = tasksReducer(
-    startState,
-    tasksActions.updateTask({
+  const endState = tasksReducer(startState, {
+    type: tasksThunks.updateTask.fulfilled.type,
+    payload: {
       todolistId: "todolistId1",
       taskId: "3",
       model: { title: "Vue" },
-    }),
-  );
+    },
+  });
   expect(endState["todolistId1"][2].title).toBe("Vue");
 });
 test("property with todolistId should be deleted", () => {
