@@ -9,22 +9,6 @@ const slice = createSlice({
   name: "tasks",
   initialState: {} as TasksDomainType,
   reducers: {
-    // updateTask: (
-    //   state,
-    //   action: PayloadAction<{
-    //     todolistId: string;
-    //     taskId: string;
-    //     model: UpdateDomainTaskModelType;
-    //   }>,
-    // ) => {
-    //   const index = state[action.payload.todolistId].findIndex((t) => t.id === action.payload.taskId);
-    //   if (index > -1) {
-    //     state[action.payload.todolistId][index] = {
-    //       ...state[action.payload.todolistId][index],
-    //       ...action.payload.model,
-    //     };
-    //   }
-    // },
     changeTaskEntityStatus: (
       state,
       action: PayloadAction<{

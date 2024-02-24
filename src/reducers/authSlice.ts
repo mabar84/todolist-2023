@@ -32,7 +32,6 @@ const slice = createSlice({
     isInitialized: (sliceState) => sliceState.isInitialized,
   },
 });
-
 // thunks
 const initializeApp = createAsyncThunk<{ isLoggedIn: boolean }, undefined>(
   `${slice.name}/initializeApp`,

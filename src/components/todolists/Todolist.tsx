@@ -9,26 +9,29 @@ import { AddItem } from "components/add-item/AddItem";
 import { Tasks } from "components/todolists/Tasks";
 import { FilterButtons } from "components/filter-buttons/FilterButtons";
 
-export type TodolistPropsType = {
+export type Props = {
   todolist: TodolistDomainType;
 };
-
-export const Todolist = (props: TodolistPropsType) => {
+export const Todolist = ({ todolist }: Props) => {
+  const { id, title, entityStatus } = todolist;
   const dispatch = useDispatch();
-  const tasks = useSelector<AppRootStateType, TaskDomainType[]>((state) => state.tasks[props.todolist.id]);
+  const tasks = useSelector<AppRootStateType, TaskDomainType[]>((state) => state.tasks[id]);
 
   useEffect(() => {
-    dispatch(tasksThunks.getTasks(props.todolist.id));
+    dispatch(tasksThunks.getTasks(id));
   }, []);
 
-  const [filter, setFilter] = useState<FilterType>(props.todolist.filter);
-
-  const deleteTodolist = () => dispatch(removeTodolistTC(props.todolist.id));
-  const updateTodolistTitle = (title: string) => dispatch(updateTodolistTitleTC(props.todolist.id, title));
-  // const addTask = (title: string) => dispatch(addTaskTC(props.todolist.id, title))
-  const addTask = (title: string) => dispatch(tasksThunks.addTask({ todolistId: props.todolist.id, title }));
-  const todolistClassName = s.todolist + (props.todolist.entityStatus === "loading" ? " " + s.disabled : "");
-
+  const [filter, setFilter] = useState<FilterType>(todolist.filter);
+  const deleteTodolist = () => {
+    dispatch(removeTodolistTC(id));
+  };
+  const updateTodolistTitle = (title: string) => {
+    dispatch(updateTodolistTitleTC(id, title));
+  };
+  const addTask = (title: string) => {
+    dispatch(tasksThunks.addTask({ todolistId: id, title }));
+  };
+  const todolistClassName = s.todolist + (entityStatus === "loading" ? " " + s.disabled : "");
   const filterTasks = () => {
     return filter === "active"
       ? tasks.filter((t) => !t.status)
@@ -41,7 +44,7 @@ export const Todolist = (props: TodolistPropsType) => {
   return (
     <div className={todolistClassName}>
       <h3>
-        <EditableSpan updateItemTitle={updateTodolistTitle} title={props.todolist.title} />
+        <EditableSpan updateItemTitle={updateTodolistTitle} title={title} />
         <button onClick={deleteTodolist}>Del</button>
       </h3>
       <AddItem callBack={addTask} />
