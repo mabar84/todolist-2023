@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodolistTC, getTodolistsTC, todolistsSelectors } from "reducers/todolistsSlice";
-import { Todolist } from "components/todolists/Todolist";
+import { Todolist } from "components/TodolistsList/Todolist";
 import s from "App.module.scss";
 import { AddItem } from "components/add-item/AddItem";
 import { authSelectors } from "reducers/authSlice";

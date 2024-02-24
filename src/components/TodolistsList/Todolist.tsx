@@ -6,7 +6,7 @@ import { FilterType, removeTodolistTC, TodolistDomainType, updateTodolistTitleTC
 import { TaskDomainType, tasksThunks } from "reducers/tasksSlice";
 import { EditableSpan } from "components/editable-span/EditableSpan";
 import { AddItem } from "components/add-item/AddItem";
-import { Tasks } from "components/todolists/Tasks";
+import { Tasks } from "components/TodolistsList/Tasks";
 import { FilterButtons } from "components/filter-buttons/FilterButtons";
 
 export type Props = {

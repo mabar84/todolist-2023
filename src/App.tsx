@@ -9,7 +9,7 @@ import Menu from "@mui/icons-material/Menu";
 import { appSelectors } from "reducers/appSLice";
 import { ErrorSnackbar } from "components/ErrorSnackbar/ErrorSnackbar";
 import { Navigate, Route, Routes } from "react-router-dom";
-import TodolistList from "components/todolists/TodolistList";
+import TodolistList from "components/TodolistsList/TodolistList";
 import { Login } from "components/login/Login";
 import { authSelectors, authThunks } from "reducers/authSlice";
 import CircularProgress from "@mui/material/CircularProgress";

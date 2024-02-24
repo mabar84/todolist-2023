@@ -14,12 +14,6 @@ export const todolistAPI = {
   createTodolist: (title: string) => instance.post<ResponseType<{ item: TodolistType }>>(`todo-lists`, { title }),
   deleteTodolist: (id: string) => instance.delete<ResponseType>(`todo-lists/${id}`),
   updateTodolist: (id: string, title: string) => instance.put<ResponseType>(`todo-lists/${id}`, { title }),
-  getTasks: (id: string) => instance.get(`todo-lists/${id}/tasks`),
-  createTask: (id: string, title: string) =>
-    instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${id}/tasks`, { title }),
-  deleteTask: (todolistId: string, taskId: string) => instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`),
-  updateTask: (todolistId: string, taskId: string, model: UpdateAPITaskModelType) =>
-    instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, model),
 };
 
 export const authAPI = {
@@ -28,6 +22,13 @@ export const authAPI = {
   logout: () => instance.delete<ResponseType>("/auth/login"),
 };
 ///////////////   types
+export type TodolistType = {
+  id: string;
+  title: string;
+  addedDate: string;
+  order: number;
+};
+
 export type LoginParamsType = {
   email: string;
   password: string;
@@ -47,12 +48,6 @@ export type UpdateAPITaskModelType = {
   priority: TaskPriorities;
   startDate: string;
   deadline: string;
-};
-export type TodolistType = {
-  id: string;
-  title: string;
-  addedDate: string;
-  order: number;
 };
 export type TasksType = {
   [key: string]: TaskType[];

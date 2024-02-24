@@ -1,8 +1,8 @@
-import { todolistAPI, TodolistType } from "api/todolist-api";
 import { Dispatch } from "redux";
 import { handleNetworkAppError, handleServerAppError } from "utils/error-utils";
 import { appActions, RequestStatusType } from "reducers/appSLice";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { todolistAPI, TodolistType } from "components/TodolistsList/api/todolists.api";
 
 const slice = createSlice({
   name: "todolists",
@@ -29,9 +29,9 @@ const slice = createSlice({
       }
     },
     // changeTodolistFilter: (state, action: PayloadAction<{ id: string, filter: FilterType }>) => {
-    //     const index = state.todolists.findIndex((tl) => tl.id === action.payload.id)
+    //     const index = state.TodolistsList.findIndex((tl) => tl.id === action.payload.id)
     //     if (index > -1) {
-    //         state.todolists[index].filter = action.payload.filter
+    //         state.TodolistsList[index].filter = action.payload.filter
     //     }
     // },
     changeTodolistEntityStatus: (state, action: PayloadAction<{ id: string; entityStatus: RequestStatusType }>) => {
