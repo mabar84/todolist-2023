@@ -4,8 +4,8 @@ import s from "./Todolist.module.scss";
 import { AppRootStateType } from "state/store";
 import {
   FilterType,
-  removeTodolistTC,
   TodolistDomainType,
+  todolistsThunks,
   updateTodolistTitleTC,
 } from "components/TodolistsList/model/todolists/todolistsSlice";
 import { TaskDomainType, tasksThunks } from "components/TodolistsList/model/tasks/tasksSlice";
@@ -28,7 +28,8 @@ export const Todolist = ({ todolist }: Props) => {
 
   const [filter, setFilter] = useState<FilterType>(todolist.filter);
   const deleteTodolist = () => {
-    dispatch(removeTodolistTC(id));
+    // dispatch(removeTodolistTC(id));
+    dispatch(todolistsThunks.removeTodolist(id));
   };
   const updateTodolistTitle = (title: string) => {
     dispatch(updateTodolistTitleTC(id, title));

@@ -1,5 +1,5 @@
 import { TasksDomainType, tasksReducer, tasksThunks } from "components/TodolistsList/model/tasks/tasksSlice";
-import { todolistsActions } from "components/TodolistsList/model/todolists/todolistsSlice";
+import { todolistsThunks } from "components/TodolistsList/model/todolists/todolistsSlice";
 import { TaskStatuses } from "components/TodolistsList/api/todolists.api";
 
 let startState: TasksDomainType;
@@ -221,7 +221,11 @@ test("title of task should be changed", () => {
   expect(endState["todolistId1"][2].title).toBe("Vue");
 });
 test("property with todolistId should be deleted", () => {
-  const endState = tasksReducer(startState, todolistsActions.removeTodolist({ id: "todolistId2" }));
+  const action = {
+    type: todolistsThunks.removeTodolist.fulfilled.type,
+    payload: { id: "todolistId2" },
+  };
+  const endState = tasksReducer(startState, action);
   const keys = Object.keys(endState);
   expect(keys.length).toBe(1);
   expect(endState["todolistId2"]).not.toBeDefined();

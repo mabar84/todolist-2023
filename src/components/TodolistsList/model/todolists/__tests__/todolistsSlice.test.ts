@@ -3,6 +3,7 @@ import {
   TodolistDomainType,
   todolistsActions,
   todolistsReducer,
+  todolistsThunks,
 } from "components/TodolistsList/model/todolists/todolistsSlice";
 
 let todolistId1: string;
@@ -37,7 +38,11 @@ beforeEach(() => {
   };
 });
 test("correct todolist should be removed", () => {
-  const endState = todolistsReducer(startState, todolistsActions.removeTodolist({ id: todolistId1 }));
+  const action = {
+    type: todolistsThunks.removeTodolist.fulfilled.type,
+    payload: { id: todolistId1 },
+  };
+  const endState = todolistsReducer(startState, action);
   expect(endState.todolists.length).toBe(1);
   expect(endState.todolists[0].id).toBe(todolistId2);
 });
