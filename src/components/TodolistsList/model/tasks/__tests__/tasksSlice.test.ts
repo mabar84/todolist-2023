@@ -1,5 +1,5 @@
-import { TasksDomainType, tasksReducer, tasksThunks } from "reducers/tasksSlice";
-import { todolistsActions } from "reducers/todolistsSlice";
+import { TasksDomainType, tasksReducer, tasksThunks } from "components/TodolistsList/model/tasks/tasksSlice";
+import { todolistsActions } from "components/TodolistsList/model/todolists/todolistsSlice";
 import { TaskStatuses } from "components/TodolistsList/api/todolists.api";
 
 let startState: TasksDomainType;

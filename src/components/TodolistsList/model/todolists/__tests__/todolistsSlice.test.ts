@@ -1,5 +1,9 @@
 import { v1 } from "uuid";
-import { TodolistDomainType, todolistsActions, todolistsReducer } from "reducers/todolistsSlice";
+import {
+  TodolistDomainType,
+  todolistsActions,
+  todolistsReducer,
+} from "components/TodolistsList/model/todolists/todolistsSlice";
 
 let todolistId1: string;
 let todolistId2: string;

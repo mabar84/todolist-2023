@@ -2,7 +2,7 @@ import { handleNetworkAppError, handleServerAppError } from "utils/error-utils";
 import { appActions, RequestStatusType } from "reducers/appSLice";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppRootStateType } from "state/store";
-import { todolistsActions } from "reducers/todolistsSlice";
+import { todolistsActions } from "components/TodolistsList/model/todolists/todolistsSlice";
 import {
   TaskPriorities,
   TaskStatuses,

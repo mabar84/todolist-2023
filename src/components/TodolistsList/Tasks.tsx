@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import { Task } from "./Task";
-import { TaskDomainType } from "reducers/tasksSlice";
+import { TaskDomainType } from "components/TodolistsList/model/tasks/tasksSlice";
 
 type TasksPropsType = {
   tasks: TaskDomainType[];
