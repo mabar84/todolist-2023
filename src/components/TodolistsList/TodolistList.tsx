@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addTodolistTC,
-  todolistsSelectors,
-  todolistsThunks,
-} from "components/TodolistsList/model/todolists/todolistsSlice";
+import { todolistsSelectors, todolistsThunks } from "components/TodolistsList/model/todolists/todolistsSlice";
 import { Todolist } from "components/TodolistsList/Todolist";
 import s from "App.module.scss";
 import { AddItem } from "components/add-item/AddItem";
@@ -15,7 +11,10 @@ const TodolistList = () => {
   const todolists = useSelector(todolistsSelectors.todolists);
   const isLoggedIn = useSelector(authSelectors.isLoggedIn);
   const dispatch = useDispatch();
-  const addTodolist = (title: string) => dispatch(addTodolistTC(title));
+  const addTodolist = (title: string) => {
+    // dispatch(addTodolistTC(title));
+    dispatch(todolistsThunks.addTodolist(title));
+  };
 
   useEffect(() => {
     if (!isLoggedIn) {

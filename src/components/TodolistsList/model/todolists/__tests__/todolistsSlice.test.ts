@@ -48,17 +48,19 @@ test("correct todolist should be removed", () => {
 });
 test("correct todolist should be added", () => {
   let newTodolistTitle = "New Todolist";
-  const endState = todolistsReducer(
-    startState,
-    todolistsActions.addTodolist({
+  const action = {
+    type: todolistsThunks.addTodolist.fulfilled.type,
+    payload: {
       todolist: {
         title: newTodolistTitle,
         id: "someId",
         order: 0,
         addedDate: "",
       },
-    }),
-  );
+    },
+  };
+
+  const endState = todolistsReducer(startState, action);
   expect(endState.todolists.length).toBe(3);
   expect(endState.todolists[0].title).toBe(newTodolistTitle);
 });

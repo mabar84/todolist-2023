@@ -2,7 +2,7 @@ import { handleNetworkAppError, handleServerAppError } from "utils/error-utils";
 import { appActions, RequestStatusType } from "reducers/appSLice";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppRootStateType } from "state/store";
-import { todolistsActions, todolistsThunks } from "components/TodolistsList/model/todolists/todolistsSlice";
+import { todolistsThunks } from "components/TodolistsList/model/todolists/todolistsSlice";
 import {
   TaskPriorities,
   TaskStatuses,
@@ -57,7 +57,10 @@ const slice = createSlice({
           state[tl.id] = [];
         });
       })
-      .addCase(todolistsActions.addTodolist, (state, action) => {
+      // .addCase(todolistsActions.addTodolist, (state, action) => {
+      //   state[action.payload.todolist.id] = [];
+      // })
+      .addCase(todolistsThunks.addTodolist.fulfilled, (state, action) => {
         state[action.payload.todolist.id] = [];
       })
       .addCase(todolistsThunks.removeTodolist.fulfilled, (state, action) => {
