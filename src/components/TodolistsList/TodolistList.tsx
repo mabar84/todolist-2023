@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addTodolistTC,
-  getTodolistsTC,
   todolistsSelectors,
+  todolistsThunks,
 } from "components/TodolistsList/model/todolists/todolistsSlice";
 import { Todolist } from "components/TodolistsList/Todolist";
 import s from "App.module.scss";
@@ -21,7 +21,7 @@ const TodolistList = () => {
     if (!isLoggedIn) {
       return;
     }
-    dispatch(getTodolistsTC());
+    dispatch(todolistsThunks.getTodolists());
   }, []);
 
   if (!isLoggedIn) {
