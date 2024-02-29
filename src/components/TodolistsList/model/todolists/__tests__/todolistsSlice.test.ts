@@ -1,7 +1,6 @@
 import { v1 } from "uuid";
 import {
   TodolistDomainType,
-  todolistsActions,
   todolistsReducer,
   todolistsThunks,
 } from "components/TodolistsList/model/todolists/todolistsSlice";
@@ -66,13 +65,14 @@ test("correct todolist should be added", () => {
 });
 test("correct todolist should change its name", () => {
   let newTodolistTitle = "New Todolist";
-  const endState = todolistsReducer(
-    startState,
-    todolistsActions.changeTodolistTitle({
+  const action = {
+    type: todolistsThunks.updateTodolistTitle.fulfilled.type,
+    payload: {
       id: todolistId2,
       title: newTodolistTitle,
-    }),
-  );
+    },
+  };
+  const endState = todolistsReducer(startState, action);
   expect(endState.todolists[0].title).toBe("What to learn");
   expect(endState.todolists[1].title).toBe(newTodolistTitle);
 });

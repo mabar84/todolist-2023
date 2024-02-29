@@ -6,7 +6,6 @@ import {
   FilterType,
   TodolistDomainType,
   todolistsThunks,
-  updateTodolistTitleTC,
 } from "components/TodolistsList/model/todolists/todolistsSlice";
 import { TaskDomainType, tasksThunks } from "components/TodolistsList/model/tasks/tasksSlice";
 import { EditableSpan } from "components/editable-span/EditableSpan";
@@ -32,7 +31,7 @@ export const Todolist = ({ todolist }: Props) => {
     dispatch(todolistsThunks.removeTodolist(id));
   };
   const updateTodolistTitle = (title: string) => {
-    dispatch(updateTodolistTitleTC(id, title));
+    dispatch(todolistsThunks.updateTodolistTitle({ id, title }));
   };
   const addTask = (title: string) => {
     dispatch(tasksThunks.addTask({ todolistId: id, title }));
