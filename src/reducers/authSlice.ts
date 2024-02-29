@@ -2,6 +2,8 @@ import { appActions } from "reducers/appSLice";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { handleNetworkAppError, handleServerAppError } from "utils/error-utils";
 import { authAPI, LoginParamsType } from "components/TodolistsList/api/todolists.api";
+import { tasksActions } from "components/TodolistsList/model/tasks/tasksSlice";
+import { todolistsActions } from "components/TodolistsList/model/todolists/todolistsSlice";
 
 const slice = createSlice({
   name: "auth",
@@ -78,9 +80,8 @@ const logout = createAsyncThunk<{ isLoggedIn: boolean }, undefined>(`${slice.nam
     const res = await authAPI.logout();
     if (res.data.resultCode === 0) {
       dispatch(appActions.setStatus({ status: "succeeded" }));
-
-      // dispatch(todolistsThunks.getTodolists.fulfilled({ todolists: [] }));
-      // dispatch(todolistsActions.setTodolists({ todolists: [] }));
+      dispatch(tasksActions.clearTasks());
+      dispatch(todolistsActions.clearTodolists());
       return { isLoggedIn: false };
     } else {
       handleServerAppError(res.data, dispatch);

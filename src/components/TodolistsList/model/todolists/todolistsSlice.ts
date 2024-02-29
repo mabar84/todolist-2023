@@ -34,6 +34,9 @@ const slice = createSlice({
         state.todolists[index].entityStatus = action.payload.entityStatus;
       }
     },
+    clearTodolists: () => {
+      return { todolists: [] };
+    },
   },
   extraReducers: (builder) => {
     builder
