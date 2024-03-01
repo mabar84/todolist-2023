@@ -1,6 +1,6 @@
 import React from "react";
-import { TaskDomainType } from "./model/tasks/tasksSlice";
-import { Task } from "./Task";
+import { TaskDomainType } from "features/TodolistsList/model/tasks/tasksSlice";
+import { Task } from "features/TodolistsList/ui/Todolist/Task";
 
 type TasksPropsType = {
   tasks: TaskDomainType[];

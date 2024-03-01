@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from "react";
-import s from "./Todolist.module.scss";
+import s from "features/TodolistsList/ui/Todolist/Todolist.module.scss";
 import { useDispatch } from "react-redux";
 import { EditableSpan } from "components/editable-span/EditableSpan";
-import { TaskDomainType, tasksThunks } from "./model/tasks/tasksSlice";
+import { TaskDomainType, tasksThunks } from "features/TodolistsList/model/tasks/tasksSlice";
 
 type Props = {
   task: TaskDomainType;

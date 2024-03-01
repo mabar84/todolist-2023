@@ -5,7 +5,7 @@ import { AddItem } from "components/add-item/AddItem";
 import { authSelectors } from "features/auth/model/authSlice";
 import { Navigate } from "react-router-dom";
 import { todolistsSelectors, todolistsThunks } from "features/TodolistsList/model/todolists/todolistsSlice";
-import { Todolist } from "features/TodolistsList/Todolist";
+import { Todolist } from "features/TodolistsList/ui/Todolist/Todolist";
 
 const TodolistList = () => {
   const todolists = useSelector(todolistsSelectors.todolists);

@@ -13,7 +13,7 @@ import { Login } from "components/login/Login";
 import { authSelectors, authThunks } from "features/auth/model/authSlice";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
-import TodolistList from "features/TodolistsList/TodolistList";
+import TodolistList from "features/TodolistsList/ui/Todolist/TodolistList";
 
 export const App = () => {
   const dispatch = useDispatch();

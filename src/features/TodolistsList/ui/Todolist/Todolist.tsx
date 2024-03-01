@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import s from "./Todolist.module.scss";
+import s from "features/TodolistsList/ui/Todolist/Todolist.module.scss";
 import { AppRootStateType } from "state/store";
 
 import { EditableSpan } from "components/editable-span/EditableSpan";
@@ -8,7 +8,7 @@ import { AddItem } from "components/add-item/AddItem";
 import { FilterButtons } from "components/filter-buttons/FilterButtons";
 import { FilterType, TodolistDomainType, todolistsThunks } from "features/TodolistsList/model/todolists/todolistsSlice";
 import { TaskDomainType, tasksThunks } from "features/TodolistsList/model/tasks/tasksSlice";
-import { Tasks } from "features/TodolistsList/Tasks";
+import { Tasks } from "features/TodolistsList/ui/Todolist/Tasks";
 
 export type Props = {
   todolist: TodolistDomainType;
