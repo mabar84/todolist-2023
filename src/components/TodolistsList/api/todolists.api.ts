@@ -28,7 +28,6 @@ export type TodolistType = {
   addedDate: string;
   order: number;
 };
-
 export type LoginParamsType = {
   email: string;
   password: string;

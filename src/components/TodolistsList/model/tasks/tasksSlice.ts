@@ -103,7 +103,7 @@ const removeTask = createAsyncThunk<{ todolistId: string; taksId: string }, { to
         }),
       );
       const res = await tasksAPI.deleteTask(arg.todolistId, arg.taksId);
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCode.success) {
         dispatch(appActions.setStatus({ status: "succeeded" }));
         return { todolistId: arg.todolistId, taksId: arg.taksId };
       } else {
@@ -131,7 +131,7 @@ const addTask = createAsyncThunk<{ task: TaskType }, { todolistId: string; title
       dispatch(appActions.setStatus({ status: "loading" }));
       dispatch(appActions.setStatus({ status: "loading" }));
       const res = await tasksAPI.createTask(arg.todolistId, arg.title);
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCode.success) {
         dispatch(appActions.setStatus({ status: "succeeded" }));
         return { task: res.data.data.item };
       } else {
@@ -171,7 +171,7 @@ const updateTask = createAsyncThunk<
 
     const res = await tasksAPI.updateTask(arg.todolistId, arg.taskId, APImodel);
 
-    if (res.data.resultCode === 0) {
+    if (res.data.resultCode === ResultCode.success) {
       dispatch(appActions.setStatus({ status: "succeeded" }));
       return { todolistId: arg.todolistId, taskId: arg.taskId, domainModel: arg.domainModel };
     } else {
@@ -183,6 +183,13 @@ const updateTask = createAsyncThunk<
     return rejectWithValue(null);
   }
 });
+
+export const ResultCode = {
+  success: 0,
+  error: 1,
+  captcha: 10,
+} as const;
+
 ///////////////   types
 export type UpdateDomainTaskModelType = {
   title?: string;
