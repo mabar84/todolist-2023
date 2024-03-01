@@ -1,7 +1,6 @@
 import React from "react";
-import { styled } from "styled-components";
+import { TaskDomainType } from "./model/tasks/tasksSlice";
 import { Task } from "./Task";
-import { TaskDomainType } from "components/TodolistsList/model/tasks/tasksSlice";
 
 type TasksPropsType = {
   tasks: TaskDomainType[];
@@ -9,12 +8,10 @@ type TasksPropsType = {
 
 export const Tasks = (props: TasksPropsType) => {
   return (
-    <StyledTasks>
+    <div>
       {props.tasks.map((el) => (
         <Task key={el.id} task={el} />
       ))}
-    </StyledTasks>
+    </div>
   );
 };
-
-const StyledTasks = styled.div``;

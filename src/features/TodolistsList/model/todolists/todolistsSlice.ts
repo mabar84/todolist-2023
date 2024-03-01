@@ -1,8 +1,8 @@
 import { handleServerAppError } from "utils/error-utils";
-import { appActions, RequestStatusType } from "reducers/appSLice";
+import { appActions, RequestStatusType } from "features/app/model/appSLice";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { todolistAPI, TodolistType } from "components/TodolistsList/api/todolists.api";
-import { ResultCode } from "components/TodolistsList/model/tasks/tasksSlice";
+import { todolistAPI, TodolistType } from "features/TodolistsList/api/todolists.api";
+import { ResultCode } from "features/TodolistsList/model/tasks/tasksSlice";
 
 const slice = createSlice({
   name: "todolists",
@@ -10,18 +10,6 @@ const slice = createSlice({
     todolists: [] as TodolistDomainType[],
   },
   reducers: {
-    // changeTodolistTitle: (state, action: PayloadAction<{ id: string; title: string }>) => {
-    //   const index = state.todolists.findIndex((tl) => tl.id === action.payload.id);
-    //   if (index > -1) {
-    //     state.todolists[index].title = action.payload.title;
-    //   }
-    // },
-    // changeTodolistFilter: (state, action: PayloadAction<{ id: string, filter: FilterType }>) => {
-    //     const index = state.TodolistsList.findIndex((tl) => tl.id === action.payload.id)
-    //     if (index > -1) {
-    //         state.TodolistsList[index].filter = action.payload.filter
-    //     }
-    // },
     changeTodolistEntityStatus: (state, action: PayloadAction<{ id: string; entityStatus: RequestStatusType }>) => {
       const index = state.todolists.findIndex((tl) => tl.id === action.payload.id);
       if (index > -1) {

@@ -1,6 +1,6 @@
+import { todolistAPI, TodolistType } from "features/TodolistsList/api/todolists.api";
 import React, { useEffect, useState } from "react";
-import { todolistAPI, TodolistType } from "components/TodolistsList/api/todolists.api";
-import { tasksAPI } from "components/TodolistsList/api/tasks.api";
+import { tasksAPI } from "features/TodolistsList/api/tasks.api";
 
 export default {
   title: "API",

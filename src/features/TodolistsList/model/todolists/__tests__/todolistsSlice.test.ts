@@ -3,7 +3,7 @@ import {
   TodolistDomainType,
   todolistsReducer,
   todolistsThunks,
-} from "components/TodolistsList/model/todolists/todolistsSlice";
+} from "features/TodolistsList/model/todolists/todolistsSlice";
 
 let todolistId1: string;
 let todolistId2: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
-import { Button } from "./Button";
-import { FilterType } from "components/TodolistsList/model/todolists/todolistsSlice";
+import { Button } from "components/filter-buttons/Button";
+import { FilterType } from "features/TodolistsList/model/todolists/todolistsSlice";
 
 export type FilterButtonsPropsType = {
   setFilter: (f: FilterType) => void;

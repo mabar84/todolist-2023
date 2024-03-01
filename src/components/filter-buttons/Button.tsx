@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import { FilterType } from "components/TodolistsList/model/todolists/todolistsSlice";
+import { FilterType } from "features/TodolistsList/model/todolists/todolistsSlice";
 
 export type ButtonPropsType = {
   buttonName: string;

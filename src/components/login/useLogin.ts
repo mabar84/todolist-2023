@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { authThunks } from "reducers/authSlice";
+import { authThunks } from "features/auth/model/authSlice";
 
 export const useLogin = () => {
   const dispatch = useDispatch();

@@ -6,14 +6,14 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/icons-material/Menu";
-import { appSelectors } from "reducers/appSLice";
+import { appSelectors } from "features/app/model/appSLice";
 import { ErrorSnackbar } from "components/ErrorSnackbar/ErrorSnackbar";
 import { Navigate, Route, Routes } from "react-router-dom";
-import TodolistList from "components/TodolistsList/TodolistList";
 import { Login } from "components/login/Login";
-import { authSelectors, authThunks } from "reducers/authSlice";
+import { authSelectors, authThunks } from "features/auth/model/authSlice";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
+import TodolistList from "features/TodolistsList/TodolistList";
 
 export const App = () => {
   const dispatch = useDispatch();

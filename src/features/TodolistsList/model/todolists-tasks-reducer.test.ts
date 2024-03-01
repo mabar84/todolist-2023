@@ -1,24 +1,15 @@
+import { TasksDomainType, tasksReducer } from "features/TodolistsList/model/tasks/tasksSlice";
 import {
   TodolistDomainType,
   todolistsReducer,
   todolistsThunks,
-} from "components/TodolistsList/model/todolists/todolistsSlice";
-import { TasksDomainType, tasksReducer } from "components/TodolistsList/model/tasks/tasksSlice";
+} from "features/TodolistsList/model/todolists/todolistsSlice";
 
 test("ids should be equals", () => {
   const startTasksState: TasksDomainType = {};
   const startTodolistsState: {
     todolists: TodolistDomainType[];
   } = { todolists: [] };
-
-  // const action = todolistsActions.addTodolist({
-  //   todolist: {
-  //     title: "newTodolistTitle",
-  //     id: "someId",
-  //     order: 0,
-  //     addedDate: "",
-  //   },
-  // });
 
   const action = {
     type: todolistsThunks.addTodolist.fulfilled.type,

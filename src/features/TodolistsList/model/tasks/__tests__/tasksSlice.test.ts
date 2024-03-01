@@ -1,6 +1,6 @@
-import { TasksDomainType, tasksReducer, tasksThunks } from "components/TodolistsList/model/tasks/tasksSlice";
-import { todolistsThunks } from "components/TodolistsList/model/todolists/todolistsSlice";
-import { TaskStatuses } from "components/TodolistsList/api/todolists.api";
+import { TasksDomainType, tasksReducer, tasksThunks } from "features/TodolistsList/model/tasks/tasksSlice";
+import { TaskStatuses } from "features/TodolistsList/api/todolists.api";
+import { todolistsThunks } from "features/TodolistsList/model/todolists/todolistsSlice";
 
 let startState: TasksDomainType;
 beforeEach(() => {

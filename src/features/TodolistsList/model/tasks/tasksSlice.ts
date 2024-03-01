@@ -1,15 +1,15 @@
 import { handleNetworkAppError, handleServerAppError } from "utils/error-utils";
-import { appActions, RequestStatusType } from "reducers/appSLice";
+import { appActions, RequestStatusType } from "features/app/model/appSLice";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppRootStateType } from "state/store";
-import { todolistsThunks } from "components/TodolistsList/model/todolists/todolistsSlice";
+import { todolistsThunks } from "features/TodolistsList/model/todolists/todolistsSlice";
 import {
   TaskPriorities,
   TaskStatuses,
   TaskType,
   UpdateAPITaskModelType,
-} from "components/TodolistsList/api/todolists.api";
-import { tasksAPI } from "components/TodolistsList/api/tasks.api";
+} from "features/TodolistsList/api/todolists.api";
+import { tasksAPI } from "features/TodolistsList/api/tasks.api";
 
 const slice = createSlice({
   name: "tasks",
@@ -133,7 +133,8 @@ const addTask = createAsyncThunk<{ task: TaskType }, { todolistId: string; title
       const res = await tasksAPI.createTask(arg.todolistId, arg.title);
       if (res.data.resultCode === ResultCode.success) {
         dispatch(appActions.setStatus({ status: "succeeded" }));
-        return { task: res.data.data.item };
+        const task = res.data.data.item;
+        return { task };
       } else {
         handleServerAppError(res.data, dispatch);
         return rejectWithValue(null);
@@ -191,6 +192,8 @@ export const ResultCode = {
 } as const;
 
 ///////////////   types
+export type ResultCodeType = (typeof ResultCode)[keyof typeof ResultCode];
+
 export type UpdateDomainTaskModelType = {
   title?: string;
   description?: string;

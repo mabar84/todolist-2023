@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { todolistsSelectors, todolistsThunks } from "components/TodolistsList/model/todolists/todolistsSlice";
-import { Todolist } from "components/TodolistsList/Todolist";
 import s from "App.module.scss";
 import { AddItem } from "components/add-item/AddItem";
-import { authSelectors } from "reducers/authSlice";
+import { authSelectors } from "features/auth/model/authSlice";
 import { Navigate } from "react-router-dom";
+import { todolistsSelectors, todolistsThunks } from "features/TodolistsList/model/todolists/todolistsSlice";
+import { Todolist } from "features/TodolistsList/Todolist";
 
 const TodolistList = () => {
   const todolists = useSelector(todolistsSelectors.todolists);

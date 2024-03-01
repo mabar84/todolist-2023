@@ -1,9 +1,10 @@
-import { appActions } from "reducers/appSLice";
+import { appActions } from "features/app/model/appSLice";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { handleNetworkAppError, handleServerAppError } from "utils/error-utils";
-import { authAPI, LoginParamsType } from "components/TodolistsList/api/todolists.api";
-import { tasksActions } from "components/TodolistsList/model/tasks/tasksSlice";
-import { todolistsActions } from "components/TodolistsList/model/todolists/todolistsSlice";
+import { authAPI } from "features/auth/api/auth.api";
+import { LoginParamsType } from "features/TodolistsList/api/todolists.api";
+import { tasksActions } from "features/TodolistsList/model/tasks/tasksSlice";
+import { todolistsActions } from "features/TodolistsList/model/todolists/todolistsSlice";
 
 const slice = createSlice({
   name: "auth",

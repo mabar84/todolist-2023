@@ -7,7 +7,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { authSelectors } from "reducers/authSlice";
+import { authSelectors } from "features/auth/model/authSlice";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useLogin } from "components/login/useLogin";
