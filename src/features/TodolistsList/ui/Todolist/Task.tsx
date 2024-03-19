@@ -9,26 +9,26 @@ type Props = {
 };
 export const Task = ({ task }: Props) => {
   const dispatch = useDispatch();
-  const deleteTask = () => {
+  const deleteTaskHandler = () => {
     dispatch(tasksThunks.removeTask({ todolistId: task.todoListId, taksId: task.id }));
   };
-  const updateTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
+  const updateTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const status = e.currentTarget.checked ? 2 : 0;
     dispatch(tasksThunks.updateTask({ todolistId: task.todoListId, taskId: task.id, domainModel: { status } }));
   };
-  const updateTaskTitle = (title: string) => {
+  const updateTitleHandler = (title: string) => {
     dispatch(tasksThunks.updateTask({ todolistId: task.todoListId, taskId: task.id, domainModel: { title } }));
   };
   const taskClassName =
     s.task + (task.status ? " " + s.isDone : "") + (task.entityStatus === "loading" ? " " + s.disabled : "");
 
   return (
-    <li className={taskClassName}>
+    <li key={task.id} className={taskClassName}>
       <div>
-        <input type={"checkbox"} checked={!!task.status} onChange={updateTaskStatus} />
-        <EditableSpan updateItemTitle={updateTaskTitle} title={task.title} />
+        <input type={"checkbox"} checked={!!task.status} onChange={updateTaskStatusHandler} />
+        <EditableSpan updateItemTitle={updateTitleHandler} title={task.title} />
       </div>
-      <button onClick={deleteTask}>Del</button>
+      <button onClick={deleteTaskHandler}>Del</button>
     </li>
   );
 };

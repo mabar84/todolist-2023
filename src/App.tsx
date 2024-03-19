@@ -49,6 +49,7 @@ export const App = () => {
             </Button>
           )}
         </Toolbar>
+
         <div style={{ height: "4px" }}>{status === "loading" && <LinearProgress color={"secondary"} />}</div>
       </AppBar>
       <Routes>
